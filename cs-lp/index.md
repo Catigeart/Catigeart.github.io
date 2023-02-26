@@ -13,19 +13,19 @@
 
 **解析：** 线性规划问题的最基本形式。可设购买每种食物$x_1,x_2,x_3,x_4$单位，可得线性规划方程：
 $$
-min\; z=3x_1 + 9x_2 + 20x_3 + 19x_4 \\
+min\; z=3x_1 + 9x_2 + 20x_3 + 19x_4 \\\\
 \begin{align*}
-s.t.\; 110x_1 + 160x_2 + 420x_3 + 260x_4 &≥ 2000 \\
-4x_1 + 8x_2 + 4x_3 + 14x_4 &≥ 55 \\ 
-2x_1 + 285x_2 + 22x_3 + 80x_4 &≥ 800 \\ 
+s.t.\; 110x_1 + 160x_2 + 420x_3 + 260x_4 &≥ 2000 \\\\
+4x_1 + 8x_2 + 4x_3 + 14x_4 &≥ 55 \\\\ 
+2x_1 + 285x_2 + 22x_3 + 80x_4 &≥ 800 \\\\ 
 x_1 , x_2 , x_3 , x_4 &≥ 0
 \end{align*}
 $$
 上式可简写为：
 $$
-min\; z=c^Tx \\
+min\; z=c^Tx \\\\
 \begin{align*}
-s.t.\; Ax&=b \\
+s.t.\; Ax&=b \\\\
 x&\geq 0
 \end{align*}
 $$
@@ -39,10 +39,10 @@ $$
 
 可得线性规划方程：
 $$
-max\; z=\sum _{v,(s,v)\in E}f(s,v) \\
+max\; z=\sum _{v,(s,v)\in E}f(s,v) \\\\
 \begin{align*}
-s.t.\; \sum _{u,(u,v)\in E}f(u,v)-\sum _{w,(v,w)\in E}f(v,w)&=0,&v\in V-s \\
-f(u,v)&\geq 0,&(u,v)\in E \\
+s.t.\; \sum _{u,(u,v)\in E}f(u,v)-\sum _{w,(v,w)\in E}f(v,w)&=0,&v\in V-s \\\\
+f(u,v)&\geq 0,&(u,v)\in E \\\\
 f(u,v)&\leq C(u,v),&(u,v)\in E
 \end{align*}
 $$
@@ -57,11 +57,11 @@ $$
 
 可得线性规划方程：
 $$
-min\; z=\sum _{(u,v)\in E}a(u,v)f(u,v) \\
+min\; z=\sum _{(u,v)\in E}a(u,v)f(u,v) \\\\
 \begin{align*}
-s.t.\; \sum _{u,(u,v)\in E}f(u,v)-\sum _{w,(v,w)\in E}f(v,w)&=0,&v\in V-s \\
-f(u,v)&\geq 0,&(u,v)\in E \\
-f(u,v)&\leq C(u,v),&(u,v)\in E \\
+s.t.\; \sum _{u,(u,v)\in E}f(u,v)-\sum _{w,(v,w)\in E}f(v,w)&=0,&v\in V-s \\\\
+f(u,v)&\geq 0,&(u,v)\in E \\\\
+f(u,v)&\leq C(u,v),&(u,v)\in E \\\\
 \sum _{v,(s,v)\in E}f(s,v)&=d
 \end{align*}
 $$
@@ -76,11 +76,11 @@ $$
 
 设每条边$e$流经的第$i$个物品的流量为$f_i(u,v)$，可得线性规划方程：
 $$
-max\; z=0 \\
+max\; z=0 \\\\
 \begin{align*}
-s.t.\; \sum _{u,(u,v)\in E}f_i(u,v)-\sum _{w,(v,w)\in E}f_i(v,w)&=0,&v\in V-s \\
-f_i(u,v)&\geq 0,&(u,v)\in E \\
-\sum ^k_{i=1}f_i(u,v)&\leq C(u,v),&(u,v)\in E \\
+s.t.\; \sum _{u,(u,v)\in E}f_i(u,v)-\sum _{w,(v,w)\in E}f_i(v,w)&=0,&v\in V-s \\\\
+f_i(u,v)&\geq 0,&(u,v)\in E \\\\
+\sum ^k_{i=1}f_i(u,v)&\leq C(u,v),&(u,v)\in E \\\\
 \sum _{v,(s_i,v)\in E}f(s_i,v)&=d_i
 \end{align*}
 $$
@@ -99,11 +99,11 @@ SAT问题的介绍可参考此文章：[SAT问题简介](https://zhuanlan.zhihu.
 **解析：** 设线性规划的优化目标为最大化为真的子句数量，设指示第$j$个子句是否为真的变量为$c_j$，可得线性规划方程：
 $$
 \begin{align*}
-max\;z=\;& c_1    &+&c_2     &+c_3 & \\
-s.t.\;&  x_1    &+&(1-x_2) &+x_3 &\geq c_1 \\
-      &(1-x_1)&+&x_2     &+(1-x_3)&\geq c_2 \\
-      &x_1&+&x_2&+(1-x_3)&\geq c_3 \\
-      &x_1,&&x_2,&x_3&=0/1 \\
+max\;z=\;& c_1    &+&c_2     &+c_3 & \\\\
+s.t.\;&  x_1    &+&(1-x_2) &+x_3 &\geq c_1 \\\\
+      &(1-x_1)&+&x_2     &+(1-x_3)&\geq c_2 \\\\
+      &x_1&+&x_2&+(1-x_3)&\geq c_3 \\\\
+      &x_1,&&x_2,&x_3&=0/1 \\\\
       &c_1,&&c_2,&c_3&=0/1
 \end{align*}
 $$

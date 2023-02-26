@@ -4,21 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法 - Catigeart&#39;s Blog</title><meta name="Description" content="Catigeart&#39;s Blog"><meta property="og:title" content="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法" />
+        <title>【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法 - Catigeart&#39;s Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法" />
 <meta property="og:description" content="【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法 语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://Catigeart.github.io/compilerlr/" /><meta property="og:image" content="https://Catigeart.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://catigeart.github.io/compilerlr/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-27T16:14:35+08:00" />
-<meta property="article:modified_time" content="2021-01-27T16:14:35+08:00" /><meta property="og:site_name" content="Catigeart&#39; Blog" />
+<meta property="article:modified_time" content="2021-01-27T16:14:35+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Blog" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://Catigeart.github.io/logo.jpg"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
 
 <meta name="twitter:title" content="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"/>
 <meta name="twitter:description" content="【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法 语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的"/>
 <meta name="application-name" content="Catigeart&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Catigeart.github.io/compilerlr/" /><link rel="prev" href="https://Catigeart.github.io/compilerll/" /><link rel="next" href="https://Catigeart.github.io/llvmsetup/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/compilerlr/" /><link rel="prev" href="http://catigeart.github.io/compilerll/" /><link rel="next" href="http://catigeart.github.io/llvmsetup/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -26,9 +26,9 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/Catigeart.github.io\/compilerlr\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  3127 ,
-        "url": "https:\/\/Catigeart.github.io\/compilerlr\/","datePublished": "2021-01-27T16:14:35+08:00","dateModified": "2021-01-27T16:14:35+08:00","publisher": {
+            "@id": "http:\/\/catigeart.github.io\/compilerlr\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  3114 ,
+        "url": "http:\/\/catigeart.github.io\/compilerlr\/","datePublished": "2021-01-27T16:14:35+08:00","dateModified": "2021-01-27T16:14:35+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,9 +101,9 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://catigeart.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-01-27">2021-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3127 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-01-27">2021-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3114 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -220,7 +220,7 @@ $GOTO$表意思是“跳转”，表示<strong>归约在栈顶得到某非终结
 <h3 id="lr0分析">LR(0)分析</h3>
 <p>首先，为求解方便，我们可以将文法$G$转换为增广文法$G&rsquo;$，即对开始符号$S$增加一条$S&rsquo;\rightarrow S$，$S&rsquo;$是新的开始符号，求解从$S&rsquo;$开始。<em>具体而言，这样做是为了开始符号只在位于一条式子的左部。</em>
 为讨论方便，补充项目的定义：项目即规约过程中的一个带点的句子，是左边规约部分和右边未读入部分的拼接。
-那么，刚刚在讨论分析表时，表的每一横行代表某状态。所以，该如何划分状态呢？我们可以讨论一种“等价”。比如有式子$S\rightarrow E+E,E\rightarrow aBc$，当前的项目状态是$S\rightarrow E+·E$。那么，我“期盼”着将要读入的是$E$，也就等价于我“期盼着”将要读入的是$aBc$。我们将这些等价的项目归为同一个集，称为项目集闭包，对应自动机中的一个状态。
+那么，刚刚在讨论分析表时，表的每一横行代表某状态。所以，该如何划分状态呢？我们可以讨论一种“等价”。比如有式子 $ S\rightarrow E+E,E\rightarrow aBc $，当前的项目状态是$S\rightarrow E+·E$。那么，我“期盼”着将要读入的是$E$，也就等价于我“期盼着”将要读入的是$aBc$。我们将这些等价的项目归为同一个集，称为项目集闭包，对应自动机中的一个状态。
 由此，我们可以得到求项目集闭包的通俗描述：若”期盼着“读入某符号，将其归入一个状态；若该符号是非终结符，那么对于它的某右部表达式，也就相当于”期盼“着读入该表达式的第一个符号，那么该符号的相关项目也应当归入该状态。
 根据构造闭包的思路，我们有LR(0)分析表构造算法如下：</p>
 <ul>
@@ -393,10 +393,10 @@ LALR分析形式上与LR(1)相同，大小上与LR(0)/SLR相当，分析能力�
 <li>分析能力：SLR(1)&lt;LALR(1)&lt;LR(1)</li>
 </ul>
 <blockquote>
-<p>参考资料：
-《编译原理》课程，陈鄞，哈尔滨工业大学（中国大学MOOC）
-《编译原理》课程，华保健，中国科学院大学（网易云课堂或b站免费观看）
-《编译原理》（紫龙书），机械工业出版社
+<p>参考资料： <br>
+《编译原理》课程，陈鄞，哈尔滨工业大学（中国大学MOOC） <br>
+《编译原理》课程，华保健，中国科学院大学（网易云课堂或b站免费观看） <br>
+《编译原理》（紫龙书），机械工业出版社 <br>
 《编译原理》，清华大学出版社</p>
 </blockquote>
 </div><div class="post-footer" id="post-footer">
@@ -410,7 +410,7 @@ LALR分析形式上与LR(1)相同，大小上与LR(0)/SLR相当，分析能力�
                             <a class="link-to-markdown" href="/compilerlr/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Catigeart.github.io/compilerlr/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法" data-via="xxxx" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/compilerlr/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -428,7 +428,7 @@ LALR分析形式上与LR(1)相同，大小上与LR(0)/SLR相当，分析能力�
 <div id="comments"></div></article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://catigeart.github.io/" target="_blank">Catigeart</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
@@ -437,5 +437,5 @@ LALR分析形式上与LR(1)相同，大小上与LR(0)/SLR相当，分析能力�
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
