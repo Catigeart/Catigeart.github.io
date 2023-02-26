@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux系统无痛编译安装LLVM简明指南 - Catigeart&#39;s Blog</title><meta name="Description" content="Catigeart&#39;s Blog"><meta property="og:title" content="Linux系统无痛编译安装LLVM简明指南" />
+<meta property="og:description" content="1 编译与预编译版本选择 如果对LLVM没有特别需求，只是当作一般编译器使用，安装预编译版也足以应付场面；如果需要对LLVM作个性化定制，或基于" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Catigeart.github.io/llvmsetup/" /><meta property="og:image" content="https://Catigeart.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-02-26T12:05:05+08:00" />
+<meta property="article:modified_time" content="2021-02-26T12:05:05+08:00" /><meta property="og:site_name" content="Catigeart&#39; Blog" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://Catigeart.github.io/logo.jpg"/>
+
+<meta name="twitter:title" content="Linux系统无痛编译安装LLVM简明指南"/>
+<meta name="twitter:description" content="1 编译与预编译版本选择 如果对LLVM没有特别需求，只是当作一般编译器使用，安装预编译版也足以应付场面；如果需要对LLVM作个性化定制，或基于"/>
+<meta name="application-name" content="Catigeart&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Catigeart.github.io/llvmsetup/" /><link rel="prev" href="https://Catigeart.github.io/compilerlr/" /><link rel="next" href="https://Catigeart.github.io/osnote/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux系统无痛编译安装LLVM简明指南",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Catigeart.github.io\/llvmsetup\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  2071 ,
+        "url": "https:\/\/Catigeart.github.io\/llvmsetup\/","datePublished": "2021-02-26T12:05:05+08:00","dateModified": "2021-02-26T12:05:05+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Blog">Catigeart&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Blog">Catigeart&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux系统无痛编译安装LLVM简明指南</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://catigeart.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-02-26">2021-02-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2071 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#41-仓库下载">4.1 仓库下载</a></li>
+    <li><a href="#42-回退版本">4.2 回退版本</a></li>
+    <li><a href="#43-编译llvm工程">4.3 编译llvm工程</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="1-编译与预编译版本选择">1 编译与预编译版本选择</h1>
+<p>如果对LLVM没有特别需求，只是当作一般编译器使用，安装预编译版也足以应付场面；如果需要对LLVM作个性化定制，或基于LLVM开发，或学习LLVM源码，那手动编译LLVM工程会是更好的选择。</p>
+<h1 id="2-操作系统选择">2 操作系统选择</h1>
+<p>此处选择Linux系统。</p>
+<h1 id="3-编译安装指南">3 编译安装指南</h1>
+<p>LLVM是一个仍在快速发展的开源项目，已经成为又一个版本怪物，中文互联网上鱼龙混杂的各种LLVM编译步骤指南大多已经过时，或隐藏着各种未知的坑，即使是官方不同出处的文档，也可能存在各自不规整统一之处。
+因此，LLVM编译指南靠谱程度依次为：GitHub仓库的Readme.md$&gt;$官方各种文档$&gt;$互联网其他编译指南。而我的建议是——</p>
+<p><strong>直接从GitHub仓库克隆工程到本地进行编译！</strong></p>
+<p><strong>直接从GitHub仓库克隆工程到本地进行编译！</strong></p>
+<p><strong>直接从GitHub仓库克隆工程到本地进行编译！</strong></p>
+<p>为什么直接从GitHub仓库clone？一方面，它足够完整，便于利用cmake指令灵活定制并集中编译；另一方面，GitHub上的Readme.md提供的安装指南一定是紧跟版本的，无过时之虞。<strong>如果不需要GitHub上LLVM的最新版本，只需要在把工程clone到本地以后再手动回退到指定tag的版本即可。</strong></p>
+<p>GitHub回退到指定版本（指定Tag）的网上教程很多，此处不再赘述。注意我们只需要硬回退本地版本，不需要回退以后提交到远程仓库的步骤。</p>
+<p>综上所述，无痛编译安装LLVM的步骤和方法是：<strong>从GitHub仓库克隆工程到本地，将本地工程回退到指定版本，再按照对应版本的readme.md教程编译LLVM工程。</strong></p>
+<h1 id="4-linux下编译指定版本llvm实例">4 Linux下编译指定版本LLVM实例</h1>
+<p><strong>编译平台</strong>：Ubuntu 20.04.2 LTS
+<strong>LLVM版本</strong>：10.0.1</p>
+<p>LLVM的GitHub仓库链接：<a href="https://github.com/llvm/llvm-project" target="_blank" rel="noopener noreffer">https://github.com/llvm/llvm-project</a>
+</p>
+<p>注：编译过程中需要的git, cmake等组件从略，请根据官方指示或编译中的实际踩坑安装所需依赖。</p>
+<h2 id="41-仓库下载">4.1 仓库下载</h2>
+<p>国内下载GitHub仓库往往有速度太慢的问题，互联网对此有相当多的解决方案。此处采用的是CSDN博客<a href="https://blog.csdn.net/haejwcalcv/article/details/108028245" target="_blank" rel="noopener noreffer">https://blog.csdn.net/haejwcalcv/article/details/108028245</a>
+中提到的办法，具体地说，只需<strong>把github.com换成github.com.cnpmjs.org即可</strong>。
+克隆仓库命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git clone https://github.com.cnpmjs.org/llvm/llvm-project.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意，如果是在win平台下克隆仓库，还应当禁止代码换行符的自动转换，加上<code>--config core.autocrlf=false</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git clone --config core.autocrlf<span class="o">=</span><span class="nb">false</span> https://github.com.cnpmjs.org/llvm/llvm-project.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="42-回退版本">4.2 回退版本</h2>
+<p>因为GitHub仓库维护的是最新版本，因此我们需要用git将版本回退到指定tag。首先，我们需要先查询llvm的tag列表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git tag
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>控制台输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">llvmorg-1.0.0
+</span></span><span class="line"><span class="cl">llvmorg-1.1.0
+</span></span><span class="line"><span class="cl">llvmorg-1.2.0
+</span></span><span class="line"><span class="cl">llvmorg-1.3.0
+</span></span><span class="line"><span class="cl">llvmorg-1.4.0
+</span></span><span class="line"><span class="cl">llvmorg-1.5.0
+</span></span><span class="line"><span class="cl">llvmorg-1.6.0
+</span></span><span class="line"><span class="cl">llvmorg-1.9.0
+</span></span><span class="line"><span class="cl">llvmorg-10-init
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0-rc1
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0-rc2
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0-rc3
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0-rc4
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0-rc5
+</span></span><span class="line"><span class="cl">llvmorg-10.0.0-rc6
+</span></span><span class="line"><span class="cl">llvmorg-10.0.1
+</span></span><span class="line"><span class="cl">llvmorg-10.0.1-rc1
+</span></span><span class="line"><span class="cl">llvmorg-10.0.1-rc2
+</span></span><span class="line"><span class="cl">llvmorg-10.0.1-rc3
+</span></span><span class="line"><span class="cl">llvmorg-10.0.1-rc4
+</span></span><span class="line"><span class="cl">llvmorg-11-init
+</span></span><span class="line"><span class="cl">llvmorg-11.0.0
+</span></span><span class="line"><span class="cl">:
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看控制台输出可得，llvm 10.0.1对应的tag版本是llvmorg-10.0.1。查询该tag版本的信息指令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git show llvmorg-10.0.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>控制台输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tag llvmorg-10.0.1
+</span></span><span class="line"><span class="cl">Tagger: Tom Stellard &lt;tstellar@redhat.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Mon Jul 20 16:55:03 2020 -0700
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Tag 10.0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">commit ef32c611aa214dea855364efd7ba451ec5ec3f74 (HEAD -&gt; main, tag: llvmorg-10.0.1-rc4, tag: llvmorg-10.0.1, origin/release/10.x)
+</span></span><span class="line"><span class="cl">Author: Hubert Tong &lt;hubert.reinterpretcast@gmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Thu Apr 30 22:18:54 2020 -0400
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    [tests] Revert unhelpful change from d73eed42d1dc
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    (cherry picked from commit 0e8608b3c38886c224d252c6b126c804645b7761)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">diff --git a/llvm/test/CodeGen/X86/asm-modifier.ll b/llvm/test/CodeGen/X86/asm-modifier.ll
+</span></span><span class="line"><span class="cl">index 0b8b240f7f7d..47b185a15766 100644
+</span></span><span class="line"><span class="cl">--- a/llvm/test/CodeGen/X86/asm-modifier.ll
+</span></span><span class="line"><span class="cl">+++ b/llvm/test/CodeGen/X86/asm-modifier.ll
+</span></span><span class="line"><span class="cl">@@ -1,4 +1,4 @@
+</span></span><span class="line"><span class="cl">-; RUN: llc &lt; %s -mtriple=x86_64-unknown-unknown | FileCheck %s
+</span></span><span class="line"><span class="cl">+; RUN: llc &lt; %s | FileCheck %s
+</span></span><span class="line"><span class="cl">:
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由输出的内容可得，tag llvmorg-10.0.1对应的commit编号是ef32c611aa214dea855364efd7ba451ec5ec3f74，使用reset指令回退版本到该处：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git reset --hard ef32c611aa214dea855364efd7ba451ec5ec3f74
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>版本回退成功后，输入<code>git show</code>可以看到，git仓库的head指针已经回退到了llvm 10.0.1版本。</p>
+<h2 id="43-编译llvm工程">4.3 编译llvm工程</h2>
+<p>选择github仓库上的release/10.x分支，查阅对应的Readme.md，并根据Readme的指示进行安装。</p>
+<p>首先，建立并切换到对应的build目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> llvm-project
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后，根据编译需求，输入cmake指令build工程。此处选择Ninja方式建立文件，额外编译clang, clang-tool-extra, compiler-rt项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">cmake -G <span class="s2">&#34;Ninja&#34;</span> -DLLVM_ENABLE_PROJECTS<span class="o">=</span><span class="s2">&#34;clang;clang-tools-extra;compiler-rt;&#34;</span> ../llvm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在build的过程中，可能会出现一些Not found的提示信息，只要没有报错，就可以正常进行。</p>
+<p>命令执行完以后，可以<strong>立刻</strong>输入<code>echo $?</code>命令查看上一条命令的执行情况，如果返回值为0，则说明build命令执行成功。</p>
+<p>因为选择了Ninja方式build文件，此处采用ninja的命令完成工程构建：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">ninja <span class="o">&amp;&amp;</span> ninja install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同理，命令执行完以后，<strong>立刻</strong>输入<code>echo $?</code>命令查看上一条命令的执行情况，如果返回值为0，则说明build命令执行成功。</p>
+<p>输入指令<code>clang -v</code>验证是否安装成功，返回如下信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">clang version 10.0.1 (https://github.com.cnpmjs.org/llvm/llvm-project.git ef32c611aa214dea855364efd7ba451ec5ec3f74)
+</span></span><span class="line"><span class="cl">Target: x86_64-unknown-linux-gnu
+</span></span><span class="line"><span class="cl">Thread model: posix
+</span></span><span class="line"><span class="cl">InstalledDir: /usr/local/bin
+</span></span><span class="line"><span class="cl">Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/9
+</span></span><span class="line"><span class="cl">Selected GCC installation: /usr/lib/gcc/x86_64-linux-gnu/9
+</span></span><span class="line"><span class="cl">Candidate multilib: .;@m64
+</span></span><span class="line"><span class="cl">Selected multilib: .;@m64
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可见已成功安装llvm+clang 10.0.1版本。</p>
+<hr>
+<p><strong>20210518更新：如安装过程中gg，有可能是交换空间不足，需要手动挂载swap，可以搜索引擎查找相关教程，本文不再列出；如果是其他错误，按错误提示按部就班解决即可。</strong></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-02-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/llvmsetup/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Catigeart.github.io/llvmsetup/" data-title="Linux系统无痛编译安装LLVM简明指南" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Catigeart.github.io/llvmsetup/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Catigeart.github.io/llvmsetup/" data-title="Linux系统无痛编译安装LLVM简明指南"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Catigeart.github.io/llvmsetup/" data-title="Linux系统无痛编译安装LLVM简明指南"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Catigeart.github.io/llvmsetup/" data-title="Linux系统无痛编译安装LLVM简明指南"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/compilerlr/" class="prev" rel="prev" title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法</a>
+            <a href="/osnote/" class="next" rel="next" title="操作系统复习笔记">操作系统复习笔记<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://catigeart.github.io/" target="_blank">Catigeart</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

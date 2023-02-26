@@ -4,15 +4,47 @@
         <link>https://Catigeart.github.io/</link>
         <description>Catigeart&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Mon, 28 Jun 2021 16:36:44 &#43;0800</lastBuildDate>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</lastBuildDate>
             <atom:link href="https://Catigeart.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>算法问题的线性规划建模</title>
+    <link>https://Catigeart.github.io/cs-lp/</link>
+    <pubDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>https://Catigeart.github.io/cs-lp/</guid>
+    <description><![CDATA[1 食谱问题（Diet Problem） 几种食物的每单位所含营养物质及其价格如下表所示，若每天需要2000千卡能量、55克蛋白质和800毫克钙，]]></description>
+</item>
+<item>
     <title>操作系统复习笔记</title>
     <link>https://Catigeart.github.io/osnote/</link>
     <pubDate>Mon, 28 Jun 2021 16:36:44 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>https://Catigeart.github.io/osnote/</guid>
     <description><![CDATA[一 绪论 OS的作用 用户与硬件之间的接口 管理计算机资源 抽象计算机资源 OS的发展 单道批处理系统 用户程序交给监控程序，由监控程序控制作业一个接一个交]]></description>
+</item>
+<item>
+    <title>Linux系统无痛编译安装LLVM简明指南</title>
+    <link>https://Catigeart.github.io/llvmsetup/</link>
+    <pubDate>Fri, 26 Feb 2021 12:05:05 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>https://Catigeart.github.io/llvmsetup/</guid>
+    <description><![CDATA[1 编译与预编译版本选择 如果对LLVM没有特别需求，只是当作一般编译器使用，安装预编译版也足以应付场面；如果需要对LLVM作个性化定制，或基于]]></description>
+</item>
+<item>
+    <title>【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法</title>
+    <link>https://Catigeart.github.io/compilerlr/</link>
+    <pubDate>Wed, 27 Jan 2021 16:14:35 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>https://Catigeart.github.io/compilerlr/</guid>
+    <description><![CDATA[【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法 语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的]]></description>
+</item>
+<item>
+    <title>【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法</title>
+    <link>https://Catigeart.github.io/compilerll/</link>
+    <pubDate>Wed, 27 Jan 2021 16:14:35 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>https://Catigeart.github.io/compilerll/</guid>
+    <description><![CDATA[语法分析概念 从编译器前端的流程上说，语法分析对词法分析得到的记号流进行分析，识别其中的语法错误，并将正确的记号流转化为语法树，交给编译器的后]]></description>
 </item>
 </channel>
 </rss>

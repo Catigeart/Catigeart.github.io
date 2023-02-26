@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法 - Catigeart&#39;s Blog</title><meta name="Description" content="Catigeart&#39;s Blog"><meta property="og:title" content="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法" />
+<meta property="og:description" content="【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法 语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Catigeart.github.io/compilerlr/" /><meta property="og:image" content="https://Catigeart.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-01-27T16:14:35+08:00" />
+<meta property="article:modified_time" content="2021-01-27T16:14:35+08:00" /><meta property="og:site_name" content="Catigeart&#39; Blog" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://Catigeart.github.io/logo.jpg"/>
+
+<meta name="twitter:title" content="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"/>
+<meta name="twitter:description" content="【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法 语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的"/>
+<meta name="application-name" content="Catigeart&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Catigeart.github.io/compilerlr/" /><link rel="prev" href="https://Catigeart.github.io/compilerll/" /><link rel="next" href="https://Catigeart.github.io/llvmsetup/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Catigeart.github.io\/compilerlr\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  3127 ,
+        "url": "https:\/\/Catigeart.github.io\/compilerlr\/","datePublished": "2021-01-27T16:14:35+08:00","dateModified": "2021-01-27T16:14:35+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Blog">Catigeart&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Blog">Catigeart&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://catigeart.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-01-27">2021-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3127 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#自底向上分析lr概述">自底向上分析（LR概述）</a>
+      <ul>
+        <li><a href="#lr0分析">LR(0)分析</a></li>
+        <li><a href="#slr分析">SLR分析</a></li>
+        <li><a href="#lr1分析">LR(1)分析</a></li>
+        <li><a href="#lalr分析">LALR分析</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://blog.csdn.net/weixin_43404388/article/details/113118729" target="_blank" rel="noopener noreffer">【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法</a>
+</p>
+<hr>
+<p>语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的分析思路是，对一个句子$s$，不断进行归约（“合并”），看能否归约成开始符号$S$的状态。</p>
+<h2 id="自底向上分析lr概述">自底向上分析（LR概述）</h2>
+<p>自底向上分析通常讨论的是LR分析算法，也叫“移进-归约算法”。仍然是循序渐进的讨论，从比较朴素的归约动机开始，逐步讨论如何对其完善。
+LR分析指每次从左(L)读入，从右(R)反向构造出最右推导序列。分析是在从左到右读入的过程中进行的。在读入一定子串以后，如果右端可以进行归约，则向上归约。引入点记号“<strong>·</strong>”以指示句子读入的情况。如下例子所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">有文法如下：
+</span></span><span class="line"><span class="cl">E -&gt; E + T
+</span></span><span class="line"><span class="cl">   | T
+</span></span><span class="line"><span class="cl">T -&gt; T * F
+</span></span><span class="line"><span class="cl">   | F
+</span></span><span class="line"><span class="cl">F -&gt; n
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">给出算式 2 + 3 * 4，归约过程如下：
+</span></span><span class="line"><span class="cl">				2 + 3 * 4
+</span></span><span class="line"><span class="cl">2				· + 3 * 4
+</span></span><span class="line"><span class="cl">F				· + 3 * 4
+</span></span><span class="line"><span class="cl">T				· + 3 * 4
+</span></span><span class="line"><span class="cl">E				· + 3 * 4
+</span></span><span class="line"><span class="cl">E + 			  · 3 * 4
+</span></span><span class="line"><span class="cl">E + 3			    · * 4
+</span></span><span class="line"><span class="cl">E + F			    · * 4
+</span></span><span class="line"><span class="cl">E + T			    · * 4
+</span></span><span class="line"><span class="cl">E + T *			      · 4
+</span></span><span class="line"><span class="cl">E + T * 4		        ·
+</span></span><span class="line"><span class="cl">E + T * F		        ·
+</span></span><span class="line"><span class="cl">E + T		       		·
+</span></span><span class="line"><span class="cl">E			       		·
+</span></span><span class="line"><span class="cl">S			       		·
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由此，LR过程实际上生成的是一个<strong>逆序的最右推导</strong>。已处理部分的符号串，实际上是一个栈结构。因此，该算法的框架可以归纳成如下的移进、归约两个步骤。</p>
+<ol>
+<li>移进：将一个记号移进到栈顶中；</li>
+<li>归约：将栈顶的n个符号归约成一个非终结符。</li>
+</ol>
+<p>显然，我们需要一个机制去确定何时应当移进，何时应当归约，否则该算法也会退化成盲目的搜索。
+讨论“句柄”的概念。句柄在LR算法中可以理解为<strong>和产生式右部匹配的子串</strong>。显然，找到合适的句柄，我们就能在正确的步骤归约，从而实现对句子$s$的正确验证。
+为了正确高效地实现LR算法，我们可以采取类似于LL的**表驱动的算法思路。**通常来说，LR类算法的分析表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>ACTION</th>
+<th>GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>&hellip;（非终结符分栏）</td>
+<td>&hellip;（终结符分栏）</td>
+</tr>
+<tr>
+<td>$ACTION$，即“动作”。在第$n$个状态时读入某终结符应当做什么动作。$ACTION$表的元素通常有2种：</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>$si$，s是“shift”的缩写，指示状态的转换，<strong>i指示转换到的状态编号</strong>；</li>
+<li>$ri$，r是“reduce”的缩写，指示此时应当对栈顶子串做归约动作，<strong>i指示对应的（右部）表达式的编号</strong>。</li>
+</ol>
+<p>此外，$ACTION$表中的“acc”是“accept”的缩写，表示读入到此处的时候可以已可以接受该句子，LR算法结束。
+$GOTO$表意思是“跳转”，表示<strong>归约在栈顶得到某非终结符后，应该跳转到什么状态</strong>。
+不同的LR算法，对分析表的构造方法并不相同。以下将对LR(0)，SLR，LR(1)，LALR进行讨论。</p>
+<h3 id="lr0分析">LR(0)分析</h3>
+<p>首先，为求解方便，我们可以将文法$G$转换为增广文法$G&rsquo;$，即对开始符号$S$增加一条$S&rsquo;\rightarrow S$，$S&rsquo;$是新的开始符号，求解从$S&rsquo;$开始。<em>具体而言，这样做是为了开始符号只在位于一条式子的左部。</em>
+为讨论方便，补充项目的定义：项目即规约过程中的一个带点的句子，是左边规约部分和右边未读入部分的拼接。
+那么，刚刚在讨论分析表时，表的每一横行代表某状态。所以，该如何划分状态呢？我们可以讨论一种“等价”。比如有式子$S\rightarrow E+E,E\rightarrow aBc$，当前的项目状态是$S\rightarrow E+·E$。那么，我“期盼”着将要读入的是$E$，也就等价于我“期盼着”将要读入的是$aBc$。我们将这些等价的项目归为同一个集，称为项目集闭包，对应自动机中的一个状态。
+由此，我们可以得到求项目集闭包的通俗描述：若”期盼着“读入某符号，将其归入一个状态；若该符号是非终结符，那么对于它的某右部表达式，也就相当于”期盼“着读入该表达式的第一个符号，那么该符号的相关项目也应当归入该状态。
+根据构造闭包的思路，我们有LR(0)分析表构造算法如下：</p>
+<ul>
+<li>首先，根据$S&rsquo;\rightarrow S$构造初始闭包C0，该闭包只含一个项目：$S&rsquo;\rightarrow ·S$</li>
+<li>若闭包的分析还没有完成，取出某还没有分析的闭包，根据它读入新符号以后的action和goto情况，建立新的状态闭包</li>
+</ul>
+<p>LR(0)分析表构造算法伪代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">closure</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="c1">// C是某状态对应的闭包
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">while</span> <span class="p">(</span><span class="n">C</span> <span class="n">is</span> <span class="n">still</span> <span class="n">changing</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="nl">i</span><span class="p">:</span> <span class="n">C</span><span class="p">)</span> <span class="c1">// example: i = A-&gt; beta · B gamma 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">C</span> <span class="o">+=</span> <span class="p">{</span><span class="n">B</span> <span class="o">-&gt;</span> <span class="p">...}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Goto</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c1">// 求GOTO得到的新状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">tmp</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="nl">i</span><span class="p">:</span> <span class="n">C</span><span class="p">)</span> <span class="c1">// example: i = A-&gt; beta · B gamma
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">tmp</span> <span class="o">+=</span> <span class="p">{</span><span class="n">A</span><span class="o">-&gt;</span> <span class="n">beta</span> <span class="n">B</span> <span class="err">·</span> <span class="n">gamma</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">closure</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">LR0_table</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="n">C0</span> <span class="o">=</span> <span class="n">closure</span><span class="p">(</span><span class="n">S</span><span class="err">&#39;</span><span class="o">-&gt;</span><span class="err">·</span><span class="n">S</span><span class="err">$</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">state_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">C0</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Q</span> <span class="o">=</span> <span class="n">enqueue</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">Q</span> <span class="n">isn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">empty</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">C</span> <span class="o">=</span> <span class="n">dequeue</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="nl">x</span><span class="p">:</span> <span class="n">N</span><span class="o">+</span><span class="n">T</span><span class="p">)</span> <span class="c1">// N是非终结符集，T是终结符集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">D</span> <span class="o">=</span> <span class="n">Goto</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="n">in</span> <span class="n">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="n">ACTION</span><span class="p">[</span><span class="n">C</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span>
+</span></span><span class="line"><span class="cl">			<span class="k">else</span>
+</span></span><span class="line"><span class="cl">				<span class="n">GOTO</span><span class="p">[</span><span class="n">C</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">D</span> <span class="n">isn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">in</span> <span class="n">state_set</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="n">state_set</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="n">enqueue</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>LR(0)算法伪代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">push</span><span class="p">(</span><span class="err">$</span><span class="p">)</span> <span class="c1">// 终止符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 初始状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">token</span> <span class="n">t</span> <span class="o">=</span> <span class="n">nextToken</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="n">state</span> <span class="n">s</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ACTION</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#34;si&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ACTION</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#34;rj&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">pop</span> <span class="p">(</span><span class="n">the</span> <span class="n">right</span> <span class="n">hand</span> <span class="n">of</span> <span class="n">the</span> <span class="n">production</span> <span class="s">&#34;j:X-&gt;beta&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">state</span> <span class="n">s</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="n">push</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">push</span><span class="p">(</span><span class="n">Goto</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">X</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span>
+</span></span><span class="line"><span class="cl">		<span class="n">error</span><span class="p">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="slr分析">SLR分析</h3>
+<p>然而，LR(0)分析仍然可能存在冲突，考虑以下状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E -&gt; T ·
+</span></span><span class="line"><span class="cl">T -&gt; T · * F
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时如果读入*，将无法得知应当采取移进动作还是采取归约动作（移进-归约冲突）。对于这种情况，SLR算法给出了一个依靠$FOLLOW$集解决的方案。对于下一个要读入的符号，它要么被移进，要么被归约成某个非终结符。设某状态下可接受若干符号，只要这些符号要么位于移进集合，要么位于某个FOLLOW集，集合之间两两互不相交，就可以用前看下一个输入的符号来解决。这种方法被称为简单的LR方法，也就是SLR方法。</p>
+<ul>
+<li>SLR和LR的区别只在于对归约的处理：
+<ul>
+<li>对于状态i上的项目 X-&gt; ${\alpha}$ ·
+<ul>
+<li>仅对 y ${\in}$FOLLOW(X)添加ACTION[i, y]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="lr1分析">LR(1)分析</h3>
+<p>SLR分析仍然存在问题。SLR只是简单地考察下一个输入符号b是否属于与归约项目$A\rightarrow\alpha$相关联的$FOLLOW(A)$，但$b\in FOLLOW(A)$只是归约$\alpha$的一个必要条件，不是充分条件。LR(1)分析法提出的动机是，在特定位置，某符号$A$的后继符集合是$FOLLOW(A)$的子集。那么如何求出这个在特定位置的后继符集合呢？依靠前面已知状态的推导。观察如下例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">S -&gt; L = R
+</span></span><span class="line"><span class="cl">L -&gt; * R
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由第一条产生式可以进一步推导出 L -&gt; * R也应该加入到这个闭包里，但这两个L -&gt; * R是不一样的。原本的表达式是一个原始的式子，它期望后接的符号是终结符$，而由S推导出来的L式，后接的应该是=。因此推导出来的新闭包可以表示为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">S -&gt; L = R, $
+</span></span><span class="line"><span class="cl">L -&gt; * R, =
+</span></span><span class="line"><span class="cl">L -&gt; * R, $
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据这样的思路，我们就把LR算法的前看1符号情况进行了细化，称为LR(1)算法。LR(1)的算法大部分和LR(0)相同，仅闭包的构造方法不同：</p>
+<ul>
+<li>对项目$[X\rightarrow\alpha·Y\beta,a]$
+<ul>
+<li>添加$[Y\rightarrow\gamma,b]$到项目集
+<ul>
+<li>其中$b$是$X$式中$Y$被期望紧接着的符号（展望符）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="lalr分析">LALR分析</h3>
+<p>LR(1)分析固然分析能力更强，但是也带来了新的问题：状态机中的许多状态，可能仅仅式被期望的后接符号（称为展望符）不一样，而他们的表达式集是完全相同的。LALR分析，即在LR(1)分析得到的状态机图基础上，将表达式完全相同的状态予以合并。这样合并以后，由于忽略了展望符的信息，可能产生归约-归约冲突。
+LALR分析形式上与LR(1)相同，大小上与LR(0)/SLR相当，分析能力介于SLR和LR(1)之间。</p>
+<ul>
+<li>分析能力：SLR(1)&lt;LALR(1)&lt;LR(1)</li>
+</ul>
+<blockquote>
+<p>参考资料：
+《编译原理》课程，陈鄞，哈尔滨工业大学（中国大学MOOC）
+《编译原理》课程，华保健，中国科学院大学（网易云课堂或b站免费观看）
+《编译原理》（紫龙书），机械工业出版社
+《编译原理》，清华大学出版社</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-01-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/compilerlr/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Catigeart.github.io/compilerlr/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Catigeart.github.io/compilerlr/" data-title="【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/compilerll/" class="prev" rel="prev" title="【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法</a>
+            <a href="/llvmsetup/" class="next" rel="next" title="Linux系统无痛编译安装LLVM简明指南">Linux系统无痛编译安装LLVM简明指南<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://catigeart.github.io/" target="_blank">Catigeart</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
