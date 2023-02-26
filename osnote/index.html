@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>操作系统复习笔记 - Catigeart&#39;s Blog</title><meta name="Description" content="Catigeart&#39;s Blog"><meta property="og:title" content="操作系统复习笔记" />
+<meta property="og:description" content="一 绪论 OS的作用 用户与硬件之间的接口 管理计算机资源 抽象计算机资源 OS的发展 单道批处理系统 用户程序交给监控程序，由监控程序控制作业一个接一个交" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Catigeart.github.io/osnote/" /><meta property="og:image" content="https://Catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-28T16:36:44+08:00" />
+<meta property="article:modified_time" content="2021-06-28T16:36:44+08:00" /><meta property="og:site_name" content="Catigeart&#39; Blog" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://Catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="操作系统复习笔记"/>
+<meta name="twitter:description" content="一 绪论 OS的作用 用户与硬件之间的接口 管理计算机资源 抽象计算机资源 OS的发展 单道批处理系统 用户程序交给监控程序，由监控程序控制作业一个接一个交"/>
+<meta name="application-name" content="Catigeart&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Catigeart.github.io/osnote/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "操作系统复习笔记",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Catigeart.github.io\/osnote\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  7518 ,
+        "url": "https:\/\/Catigeart.github.io\/osnote\/","datePublished": "2021-06-28T16:36:44+08:00","dateModified": "2021-06-28T16:36:44+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Blog"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Blog"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统复习笔记</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://catigeart.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-06-28">2021-06-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7518 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-绪论">一 绪论</a>
+      <ul>
+        <li><a href="#os的作用">OS的作用</a></li>
+        <li><a href="#os的发展">OS的发展</a></li>
+      </ul>
+    </li>
+    <li><a href="#二-os结构">二 OS结构</a>
+      <ul>
+        <li><a href="#陷阱和中断">陷阱和中断</a></li>
+        <li><a href="#双模式">双模式</a></li>
+        <li><a href="#系统调用">系统调用</a></li>
+        <li><a href="#定时器">定时器</a></li>
+      </ul>
+    </li>
+    <li><a href="#三-进程与线程">三 进程与线程</a>
+      <ul>
+        <li><a href="#进程的定义">进程的定义</a></li>
+        <li><a href="#进程与程序">进程与程序</a></li>
+        <li><a href="#进程的状态">进程的状态</a></li>
+        <li><a href="#挂起">挂起</a></li>
+        <li><a href="#pcb">PCB</a></li>
+        <li><a href="#进程创建与终止">进程创建与终止</a></li>
+        <li><a href="#进程通信">进程通信</a></li>
+        <li><a href="#线程">线程</a></li>
+      </ul>
+    </li>
+    <li><a href="#四-进程调度">四 进程调度</a></li>
+    <li><a href="#五-进程同步">五 进程同步</a>
+      <ul>
+        <li><a href="#peterson算法">Peterson算法</a></li>
+        <li><a href="#信号量机制">信号量机制</a></li>
+        <li><a href="#生产者-消费者">生产者-消费者</a></li>
+        <li><a href="#读者-写者问题">读者-写者问题</a></li>
+        <li><a href="#管程">管程</a></li>
+        <li><a href="#哲学家就餐问题管程">哲学家就餐问题（管程）</a></li>
+      </ul>
+    </li>
+    <li><a href="#六-死锁">六 死锁</a>
+      <ul>
+        <li><a href="#死锁发生的必要条件">死锁发生的必要条件</a></li>
+        <li><a href="#资源分配图">资源分配图</a></li>
+        <li><a href="#死锁的处理方法">死锁的处理方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#七-存储管理">七 存储管理</a>
+      <ul>
+        <li><a href="#相关概念和术语">相关概念和术语</a></li>
+        <li><a href="#内存保护">内存保护</a></li>
+        <li><a href="#用户程序处理过程">用户程序处理过程</a></li>
+        <li><a href="#连续分配存储管理">连续分配存储管理</a></li>
+        <li><a href="#碎片">碎片</a></li>
+        <li><a href="#覆盖与交换技术">覆盖与交换技术</a></li>
+        <li><a href="#分页存储管理">分页存储管理</a></li>
+        <li><a href="#地址变换">地址变换</a></li>
+        <li><a href="#页表">页表</a></li>
+      </ul>
+    </li>
+    <li><a href="#八-虚存管理">八 虚存管理</a>
+      <ul>
+        <li><a href="#请求分页机制">请求分页机制</a></li>
+        <li><a href="#页面置换算法">页面置换算法</a></li>
+        <li><a href="#页框分配算法">页框分配算法</a></li>
+        <li><a href="#请求分页系统的性能分析">请求分页系统的性能分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#九-io系统">九 I/O系统</a>
+      <ul>
+        <li><a href="#io系统的基本功能">I/O系统的基本功能</a></li>
+        <li><a href="#io系统的层次结构">I/O系统的层次结构</a></li>
+        <li><a href="#io系统接口">I/O系统接口</a></li>
+        <li><a href="#io系统结构">I/O系统结构</a></li>
+        <li><a href="#io控制方式">I/O控制方式</a></li>
+        <li><a href="#缓冲">缓冲</a></li>
+      </ul>
+    </li>
+    <li><a href="#十-文件系统">十 文件系统</a>
+      <ul>
+        <li><a href="#文件的逻辑结构">文件的逻辑结构</a></li>
+        <li><a href="#文件的目录结构">文件的目录结构</a></li>
+        <li><a href="#文件共享">文件共享</a></li>
+        <li><a href="#文件保护措施存取控制">文件保护措施：存取控制</a></li>
+        <li><a href="#文件的物理结构">文件的物理结构</a></li>
+        <li><a href="#空闲空间管理">空闲空间管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#十一-磁盘管理">十一 磁盘管理</a>
+      <ul>
+        <li><a href="#磁盘的访问时间">磁盘的访问时间</a></li>
+        <li><a href="#磁盘调度算法">磁盘调度算法</a></li>
+        <li><a href="#廉价磁盘冗余阵列raid">廉价磁盘冗余阵列RAID</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="一-绪论">一 绪论</h2>
+<h3 id="os的作用">OS的作用</h3>
+<ul>
+<li>用户与硬件之间的接口</li>
+<li>管理计算机资源</li>
+<li>抽象计算机资源</li>
+</ul>
+<h3 id="os的发展">OS的发展</h3>
+<ul>
+<li>单道批处理系统
+<ul>
+<li>用户程序交给监控程序，由监控程序控制作业一个接一个交给IO处理</li>
+<li>CPU等待IO、内存浪费、资源浪费</li>
+</ul>
+</li>
+<li>多道批处理系统
+<ul>
+<li>当一个作业在等待IO时，处理器可以切换到另一个不在等待IO的作业</li>
+<li>中断：中断机构（硬件）发出信号，CPU转而处理中断程序工作，完成后再返回原来的工作</li>
+<li>通道：专门负责输入输出的硬件，支持CPU和IO并行执行</li>
+<li>作业的四种状态：
+<ul>
+<li>提交、后备、运行、完成</li>
+</ul>
+</li>
+<li>三级调度
+<ul>
+<li>低级调度：内存与内存</li>
+<li>中级调度：内存与交换区</li>
+<li>高级调度：外存到内存</li>
+</ul>
+</li>
+<li>多道程序设计好处
+<ul>
+<li>CPU利用率</li>
+<li>内存和IO设备利用率</li>
+<li>系统吞吐量</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>周转时间长</li>
+<li>无交互能力</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分时系统、实时系统、微机操作系统</li>
+<li>操作系统的特征
+<ul>
+<li>并发、共享、异步、虚拟
+<ul>
+<li>概念区分：并发与并行、同步与异步</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二-os结构">二 OS结构</h2>
+<h3 id="陷阱和中断">陷阱和中断</h3>
+<ul>
+<li>中断：外部的被迫中断</li>
+<li>陷阱：程序的主动中断</li>
+</ul>
+<h3 id="双模式">双模式</h3>
+<p>计算机硬件通过模式位表示当前为内核模式或用户模式，区分操作系统执行的任务和用户执行的任务。可能引起损害的机器指令为特权指令，只有内核模式才可以执行特权指令。模式概念可以扩展为超过两个模式。</p>
+<h3 id="系统调用">系统调用</h3>
+<p>当要执行系统调用时，硬件通常将它作为软件中断。控制通过中断向量转到操作系统的中断服务程序，并且模式位也设为内核模式。内核首先验证参数是否正确和合法，执行请求，最后控制返回到系统调用之后的指令。</p>
+<h3 id="定时器">定时器</h3>
+<p>为了防止用户程序陷入死循环，或者不调用系统服务且不将控制返回给操作系统，可以使用定时器，设置指定周期后中断计算机。</p>
+<h2 id="三-进程与线程">三 进程与线程</h2>
+<h3 id="进程的定义">进程的定义</h3>
+<p>一个具有一定独立功能的可并发执行的程序，在一个数据集合上的运行过程</p>
+<h3 id="进程与程序">进程与程序</h3>
+<p>运行的动态实体与静态实体</p>
+<h3 id="进程的状态">进程的状态</h3>
+<ul>
+<li>新建状态、就绪状态、运行状态、阻塞状态、终止状态</li>
+</ul>
+<h3 id="挂起">挂起</h3>
+<ul>
+<li>挂起/解挂的原因：用户、进程、系统的需要</li>
+<li>增加挂起状态后：活动就绪、静止就绪、活动阻塞、静止阻塞</li>
+</ul>
+<h3 id="pcb">PCB</h3>
+<p>PCB是用以记录与进程相关信息的主存区，是进程存在的唯一标志</p>
+<ul>
+<li>PCB的组织方式
+<ul>
+<li>线性方式、链接方式、索引方式</li>
+</ul>
+</li>
+<li>进程切换
+<ul>
+<li>P0-&gt;系统中断-&gt;[保存PCB0-&gt;&hellip;-&gt;加载PCB1]-&gt;P1-&gt;系统中断-&gt;[保存PCB1-&gt;&hellip;-&gt;加载PCB0]-&gt;P0</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程创建与终止">进程创建与终止</h3>
+<ul>
+<li>进程图：用于描述进程家族关系的有向树，箭头表示创建关系</li>
+<li>进程创建：
+<ul>
+<li>申请空白PCB</li>
+<li>为新进程分配资源</li>
+<li>初始化PCB</li>
+<li>将新进程插入就绪队列</li>
+</ul>
+</li>
+<li>进程终止：
+<ul>
+<li>根据终止进程标识符，找到对应PCB</li>
+<li>若该进程正在执行，终止进程，设置调度标志为真</li>
+<li>如果该进程具有子孙进程，则终止其所有子孙</li>
+<li>回收所有资源，归还给其父进程或系统</li>
+<li>将PCB移出原所在队列</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程通信">进程通信</h3>
+<p>协作进程需要一种进程间通信机制（Interprocess Communicatio，IPC）来允许进程相互交互数据与信息</p>
+<ul>
+<li>进程通信类型
+<ul>
+<li>共享存储器系统</li>
+<li>消息传递系统
+<ul>
+<li>直接通信：<em>Send(Receiver, msg), Receive(Sender, msg)</em></li>
+<li>间接通信（信箱）：<em>Send(mailbox, msg), Receive(mailbox, msg)</em></li>
+<li>消息缓冲队列通信机制：生产者-消费者</li>
+</ul>
+</li>
+<li>管道通信
+<ul>
+<li>管道：用于连接一个读进程和一个写进程，以实现它们之间通信的共享文件，又称为Pipe文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="线程">线程</h3>
+<p>是进程中的一个实体，是能被系统独立调度和分派的基本单位</p>
+<ul>
+<li>基本状态：就绪、执行、堵塞</li>
+<li>基本操作：派生、调度、阻塞、激活、结束</li>
+</ul>
+<h2 id="四-进程调度">四 进程调度</h2>
+<ul>
+<li>三级调度模型
+<ul>
+<li>高级调度（作业调度）：后备队列-&gt;内存（长程调度）</li>
+<li>低级调度（进程调度）：就绪队列-&gt;运行（短程调度）</li>
+<li>中级调度（进程调度）：内存&lt;-&gt;交换区</li>
+</ul>
+</li>
+<li>调度算法
+<ul>
+<li>先来先服务（FCFS）</li>
+<li>短作业优先（SJF） - 抢占式/非抢占式</li>
+<li>优先级调度 - 抢占式/非抢占式</li>
+<li>时间片轮转（RR）</li>
+<li>多级队列
+<ul>
+<li>不同队列调度算法可以不同</li>
+<li>队列之间有优先级差异或时间片分配</li>
+</ul>
+</li>
+<li>多级反馈队列
+<ul>
+<li>进程可在队列之间移动</li>
+<li>参数：
+<ul>
+<li>队列数量</li>
+<li>每个队列的调度算法</li>
+<li>用以确定何时升级到更高优先级队列的方法</li>
+<li>用以确定何时降级到更低优先级队列的方法</li>
+<li>用以确定进程在需要服务时将会进入哪个队列的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五-进程同步">五 进程同步</h2>
+<h3 id="peterson算法">Peterson算法</h3>
+<p>两个进程互相谦让</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">turn</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span> <span class="n">flag</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">turn</span> <span class="o">==</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CRITICAL</span> <span class="n">SECTION</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">REMAINDER</span> <span class="n">SECTION</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="信号量机制">信号量机制</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">semaphore</span> <span class="n">mutex</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">process_1</span><span class="err">（）</span><span class="p">{</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">critical</span> <span class="n">section</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">remainder</span> <span class="n">section</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="生产者-消费者">生产者-消费者</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">Semaphore</span> <span class="n">muter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">Producer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">produce</span> <span class="n">item</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">empty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="p">[</span><span class="n">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">in</span> <span class="o">=</span> <span class="p">(</span><span class="n">in</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">full</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">Comsumer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">full</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">out</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">out</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">N</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">empty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">consume</span> <span class="n">item</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="读者-写者问题">读者-写者问题</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">Semaphore</span> <span class="n">mutex</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">readercount</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">Reader</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">readcount</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">readcount</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">wait</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Reading</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">readcount</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">readcount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">signal</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">Writer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">wait</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writing</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="管程">管程</h3>
+<ul>
+<li>条件变量：condition x, y;
+<ul>
+<li>每个条件变量都关联了一个队列，包含因该条件而阻塞的进程，对条件变量仅有的操作是wait()、signal()</li>
+</ul>
+</li>
+<li>x.wait()：
+<ul>
+<li>将自己阻塞在等待队列中</li>
+<li>唤醒一个等待者或者释放管程的互斥访问</li>
+</ul>
+</li>
+<li>x.signal()：
+<ul>
+<li>将等待队列中的一个线程唤醒</li>
+<li>如果等待队列为空，则等同空操作</li>
+</ul>
+</li>
+</ul>
+<h3 id="哲学家就餐问题管程">哲学家就餐问题（管程）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">monitor</span> <span class="n">DP</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">enum</span> <span class="p">{</span> <span class="n">THINKING</span><span class="p">,</span> <span class="n">HUNGRY</span><span class="p">,</span> <span class="n">EATING</span><span class="p">}</span> <span class="n">state</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">condition</span> <span class="n">self</span> <span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">pickup</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">HUNGRY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">test</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">EATING</span><span class="p">)</span> <span class="n">self</span> <span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wait</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">putdown</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">THINKING</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// testing left and right neighbors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">test</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">test</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">test</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">state</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="n">EATING</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">      <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">HUNGRY</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">      <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">state</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="n">EATING</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">      <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">EATING</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">self</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">signal</span> <span class="p">()</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">initialization_code</span><span class="p">()</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">THINKING</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="六-死锁">六 死锁</h2>
+<p>多个进程因竞争资源而造成的一种僵局，若无外力作用，这些进程将永远无法推进</p>
+<h3 id="死锁发生的必要条件">死锁发生的必要条件</h3>
+<ul>
+<li>互斥</li>
+<li>非抢占</li>
+<li>占有并等待</li>
+<li>循环等待</li>
+</ul>
+<h3 id="资源分配图">资源分配图</h3>
+<ul>
+<li>无环一定不死锁</li>
+<li>单资源有环一定死锁</li>
+</ul>
+<h3 id="死锁的处理方法">死锁的处理方法</h3>
+<ul>
+<li>死锁预防
+<ul>
+<li>破坏占有并等待
+<ul>
+<li>方法一：必须获得全部资源才能运行</li>
+<li>方法二：申请资源前必须释放自己已占有所有资源</li>
+</ul>
+</li>
+<li>破坏非抢占
+<ul>
+<li>方法一：进程申请某资源，有则分配，无则释放该进程所有资源并等待</li>
+<li>方法二：进程申请某资源，有则分配，否则检测有该资源的另一进程，若该进程在等待则抢占，否则申请资源的进程等待（允许被抢占资源）</li>
+</ul>
+</li>
+<li>破坏循环等待
+<ul>
+<li>给资源编号</li>
+<li>进程只能按递增顺序申请资源</li>
+<li>如果需要同一资源多个实例需一次申请</li>
+<li>申请编号更小资源时，需先将大编号资源全部释放</li>
+</ul>
+</li>
+<li>破坏互斥
+<ul>
+<li>临界资源不可能做到</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>死锁避免
+<ul>
+<li>系统的安全状态：Max, Allocation, Available</li>
+<li>若存在一分配顺序使进程全部执行的安全序列，则认为是安全状态</li>
+<li>银行家算法：Max, Allocation, Need, Available</li>
+</ul>
+</li>
+<li>死锁检测
+<ul>
+<li>单实例：分配图</li>
+<li>多实例：银行家</li>
+</ul>
+</li>
+<li>死锁恢复
+<ul>
+<li>进程终止
+<ul>
+<li>终止全部死锁进程</li>
+<li>一次终止一个</li>
+</ul>
+</li>
+<li>资源抢占
+<ul>
+<li>选择一个牺牲品使代价最小</li>
+<li>回滚：将进程回滚到某安全状态</li>
+<li>饥饿：防止进程饥饿，需要有限牺牲某进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="七-存储管理">七 存储管理</h2>
+<h3 id="相关概念和术语">相关概念和术语</h3>
+<ul>
+<li>逻辑地址（logical address）/相对地址：CPU所生成的地址，又称为虚拟地址（virtual address）</li>
+<li>物理地址（physical address）/绝对地址：内存单元所看到的地址（加载到内存地址寄存器中的地址）</li>
+<li>逻辑地址空间（logical address space）：由程序所生成的所有逻辑地址的集合称为逻辑地址空间</li>
+<li>物理地址空间（physicaladdress space ）：与逻辑地址对应的所有物理地址的集合称为物理地址空间</li>
+<li>重定位（relocation）：从逻辑地址（虚拟地址）到物理地址的映射称为重定位，由内存管理单元（MMU）完成</li>
+<li>重定位寄存器：基址寄存器、限长寄存器</li>
+<li>绑定：从一个地址空间到另一个地址空间的映射</li>
+</ul>
+<h3 id="内存保护">内存保护</h3>
+<ul>
+<li>基地址寄存器：最小的合法的物理内存地址</li>
+<li>界限地址寄存器：指定范围的大小</li>
+<li>内存空间保护的实现通过CPU硬件对在用户模式下产生的地址与寄存器的地址进行比较来完成</li>
+</ul>
+<h3 id="用户程序处理过程">用户程序处理过程</h3>
+<p>重定位</p>
+<ul>
+<li>静态重定位：程序装入主存之前由编译/链接程序完成重定位，入主存可立即执行</li>
+<li>动态重定位：程序入主存之前不进行重定位，入主后存执行到与地址相关项时，再进行重定位</li>
+</ul>
+<p>装入方式</p>
+<ul>
+<li>绝对装入：程序在编译时完成静态重定位，按绝对地址装入内存</li>
+<li>可重定位装入：根据内存使用情况，将装入模块进行静态重定位后装入内存</li>
+<li>动态运行时装入：装入程序将装入模块装入内存后，不将装入模块的逻辑地址转换为物理地址，在执行时用重定位寄存器进行动态重定位</li>
+</ul>
+<p>链接方式</p>
+<ul>
+<li>静态链接：程序运行之前，先将各目标模块以及所需库函数链接成一个完整的装入模块</li>
+<li>装入时动态链接：将用户源程序编译后所得到的一组目标模块，在装入内存时，采用边装入边链接的链接方式
+<ul>
+<li>容易共享：每个库程序的引用都有一个存根，用于指出如何定位适当的内存驻留库程序</li>
+</ul>
+</li>
+<li>运行时动态链接：将对某些目标模块的链接推迟到程序执行时才进行</li>
+</ul>
+<h3 id="连续分配存储管理">连续分配存储管理</h3>
+<ul>
+<li>单一连续分配</li>
+<li>固定分区分配
+<ul>
+<li>内碎片</li>
+</ul>
+</li>
+<li>动态分区分配/可变分区分配
+<ul>
+<li>算法：
+<ul>
+<li>首次适应</li>
+<li>循环首次适应</li>
+<li>最佳适应</li>
+<li>最差适应</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="碎片">碎片</h3>
+<ul>
+<li>外碎片：内存中小块的空闲分区，无法单独满足任何一个进程的需求</li>
+<li>内碎片：固定分区分配方式中存在的，已经分配给进程，但进程不会使用的空闲空间
+<ul>
+<li>紧缩、离散分配内存</li>
+</ul>
+</li>
+</ul>
+<h3 id="覆盖与交换技术">覆盖与交换技术</h3>
+<ul>
+<li>覆盖：进程内部区域的替换，主要用于早期操作系统
+<ul>
+<li>把程序划分为若干功能上相对独立的程序段，按照自身逻辑结构将那些不会同时执行的程序段共享同一块内存区域</li>
+<li>程序段先保存在磁盘上，当有关程序段的前一部分执行结束，把后续程序段调入内存，覆盖前面的程序段</li>
+</ul>
+</li>
+<li>交换：进程之间的替换
+<ul>
+<li>当内存空间紧张时，系统将内存中某些进程暂时移到外存（盘交换区），把外存中某些进程换入内存中，替换移出进程原来的内存空间</li>
+<li>这种技术是进程在内存与外存之间的动态调度，多用于分时系统中</li>
+<li>中级调度：采用交换技术</li>
+</ul>
+</li>
+</ul>
+<h3 id="分页存储管理">分页存储管理</h3>
+<ul>
+<li>分页（长度固定）
+<ul>
+<li>分页思想
+<ul>
+<li>内存物理地址空间按2n等分成页框/帧（frame），并从0连续编号：0,1,2,&hellip;</li>
+<li>作业的逻辑地址空间按页框/帧大小等分成页，并从0连续编号：0,1,2,&hellip;</li>
+<li>作业逻辑地址表示为：v=(p,d)</li>
+<li>作业连续的页，可以分配不连续的页框/帧</li>
+<li>系统设置页表PMT保存作业各页入内存后的情况，包含页号、页框号</li>
+<li>设置一个页表地址寄存器，保存当前执行进程页表的起始地址和页表的长度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分段（长度可变）</li>
+<li>段页式（分段管理虚存，分页管理实存）</li>
+</ul>
+<h3 id="地址变换">地址变换</h3>
+<p>直接地址变换</p>
+<ul>
+<li>借助页表、页表寄存器完成作业的逻辑地址（虚地址）到内存物理地址的变换</li>
+<li>页表基址寄存器（Page-table base register，PTBR）页表长度寄存器（Page-table length register，PRLR）</li>
+</ul>
+<p>具有快表的地址变换</p>
+<ul>
+<li>增设若干具有并行查询能力的特殊高速缓冲寄存器（联想寄存器/快表），保存当前执行进程的部分页表</li>
+<li>程序的局部性特征</li>
+</ul>
+<h3 id="页表">页表</h3>
+<p>页表是一种特殊的数据结构，放在系统空间的页表区，存放逻辑页与物理页帧的对应关系。 每一个进程都拥有一个自己的页表，PCB表中有指针指向页表</p>
+<ul>
+<li>层次页表</li>
+<li>哈希页表</li>
+<li>反置页表
+<ul>
+<li>一般页表：每个进程都有一个相关的页表，这些页表可能消耗大量的物理内存</li>
+<li>反置页表：为每一个物理页框设置一个条目，并记录该物理页框所分配的进程ID和对应的逻辑页</li>
+</ul>
+</li>
+</ul>
+<h2 id="八-虚存管理">八 虚存管理</h2>
+<h3 id="请求分页机制">请求分页机制</h3>
+<ul>
+<li>在分页系统的基础上增加了请求调页功能和页面置换功能</li>
+<li>整个用户程序驻留在磁盘（二级存储）上，只装入少量页面入内存即可启动运行</li>
+<li>程序运行中，由调页程序（pager）根据需要将单个页面
+从磁盘调入内存， 将不需要的页面换出到磁盘上</li>
+<li>置换时以页为单位</li>
+<li>硬件支持
+<ul>
+<li>请求页表机制</li>
+<li>缺页中断机构</li>
+<li>地址变换机构</li>
+</ul>
+</li>
+</ul>
+<p>请求页表机制</p>
+<ul>
+<li>状态位P（有效-无效位）：用于指示该页是否已经调入内存</li>
+<li>访问字段A：用于记录本页在一段时间内被访问的次数，或记录本页最近已有多长时间未被访问，以供置换算法在选择置换页面时参考</li>
+<li>修改位M（脏位）：标识该页在调入内存后是否被修改过</li>
+<li>外存地址：该页在外存上的地址，一般指物理块号</li>
+</ul>
+<p>缺页中断机构处理过程</p>
+<ol>
+<li>访问进程页表，查看访问页是否合法</li>
+<li>如果是非法访问，则终止进程访问；如果页面访
+问合法，但该页不在内存中，则需要调入</li>
+<li>在物理内存中找到一个空闲页框（free frame）</li>
+<li>调度磁盘操作，将失效页从备用存储（磁盘）中
+装入空闲页框</li>
+<li>重置页表，修改页面信息</li>
+<li>重启因缺页而中断的指令</li>
+</ol>
+<p>地址变换机构（有快表）</p>
+<ol>
+<li>存储保护检查：页号&gt;页表长度？
+<ul>
+<li>是，越界中断</li>
+<li>否则2</li>
+</ul>
+</li>
+<li>查快表
+<ul>
+<li>找到，修改访问位对于写操作置修改位，形成物理地址访问</li>
+<li>若未找到，查页表状态位
+<ul>
+<li>在主存，将表目写入快表</li>
+<li>否则，缺页中断</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="页面置换算法">页面置换算法</h3>
+<p>基本页面置换流程</p>
+<ul>
+<li>查找所需页在磁盘上的位置</li>
+<li>查找一个空闲的页框：
+<ul>
+<li>如果有空闲页框，那么就使用它</li>
+<li>如果有没有空闲页框，就使用页面置换算法以选
+择一个“牺牲”页框（victim frame）</li>
+<li>将“牺牲”页框的内容写到磁盘上，修改页表和
+页框表</li>
+</ul>
+</li>
+<li>将所需页读入空闲页框，修改相应的页表和页
+框表</li>
+<li>重启用户进程</li>
+</ul>
+<p>页面置换算法详解</p>
+<ul>
+<li>评价指标：缺页率</li>
+<li>先进先出（FIFO）页面置换算法</li>
+<li>最佳（Optimal）置换算法（理论上）
+<ul>
+<li>置换未来最长时间内不会访问的页面</li>
+</ul>
+</li>
+<li>最近最少使用（LRU）页面置换算法</li>
+<li>近似LRU页面置换算法
+<ul>
+<li>附加访问位算法
+<ul>
+<li>为页表中的每一页保留一个8位的字节</li>
+<li>在规定的时间间隔（如每隔100ms）内，时钟定时器产生中断，OS将页面的访问位转移到8位字节的高位，其他位均向右移一位，最低位丢弃，这个8位字节记录了该页面在最近的8个时间间隔内的使用情况</li>
+<li>选择值最小的页面置换，相等情况下按照FIFO算法执行</li>
+</ul>
+</li>
+<li>二次机会算法（Clock置换算法）
+<ul>
+<li>页表中的每一页有一个访问位（页面被访问后将其置为1）</li>
+<li>按照FIFO的方式选择置换页，如果该页的访问位为1，则给予第二次机会，将其访问位置为0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最不经常使用（Least Frequently Used，LFU）页面置换算法</li>
+<li>最常使用（Most Frequently Used，MFU）页面置换算法
+<ul>
+<li>具有最小次数的页可能刚刚调入内存</li>
+</ul>
+</li>
+</ul>
+<h3 id="页框分配算法">页框分配算法</h3>
+<ul>
+<li>固定分配算法
+<ul>
+<li>平均分配</li>
+<li>按比例分配：进程大小</li>
+</ul>
+</li>
+<li>基于优先级分配算法
+<ul>
+<li>按照进程的优先级成比例给进程分配页框</li>
+<li>进程发生缺页中断时
+<ul>
+<li>选择自己的页框进行页面置换</li>
+<li>选择优先级更低的进程的页框置换</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>全局分配与局部分配</p>
+<ul>
+<li>全局置换：允许从所有页框中置换</li>
+<li>局部置换：仅仅从分配给进程自己的页框中进行置换</li>
+</ul>
+<h3 id="请求分页系统的性能分析">请求分页系统的性能分析</h3>
+<p>抖动（thrashing）</p>
+<ul>
+<li>CPU的利用率会随着道数的增加而提高，直到达到最大值</li>
+<li>达到最大值后继续提高道数，CPU的利用率将不再提高，反而急剧下降，这就是“系统抖动”</li>
+<li>为了提升CPU利用率，则需要减少道数，消除抖动</li>
+</ul>
+<p>抖动产生的原因</p>
+<ul>
+<li>同时在系统中运行的进程太多，分配给每个进程的页框太少，不能满足进程正常运行的基本要求</li>
+</ul>
+<p>工作集：进程在某段时间内实际访问页的集合</p>
+<ul>
+<li>$WS(t,\Delta)$，$\Delta$为工作集尺寸</li>
+<li>$D=sum(WS_n(&hellip;))$，$m$为页框数，若$D&gt;m$，则挂起进程</li>
+</ul>
+<p>预防抖动</p>
+<ul>
+<li>采取局部置换策略</li>
+<li>将工作集算法融入作业调度</li>
+<li>利用“L=S”准则调节缺页率</li>
+<li>选择暂停的进程</li>
+</ul>
+<h2 id="九-io系统">九 I/O系统</h2>
+<h3 id="io系统的基本功能">I/O系统的基本功能</h3>
+<ol>
+<li>隐藏物理设备的细节</li>
+<li>与设备的无关性</li>
+<li>提高处理机和I/O设备的利用率</li>
+<li>对I/O设备进行控制</li>
+<li>确保对设备的正确共享</li>
+<li>错误处理</li>
+</ol>
+<h3 id="io系统的层次结构">I/O系统的层次结构</h3>
+<ul>
+<li>用户层软件</li>
+<li>设备独立性软件</li>
+<li>设备驱动程序</li>
+<li>中断驱动程序</li>
+<li>硬件</li>
+</ul>
+<h3 id="io系统接口">I/O系统接口</h3>
+<ul>
+<li>块设备接口</li>
+<li>流设备接口</li>
+<li>网络通信接口</li>
+</ul>
+<h3 id="io系统结构">I/O系统结构</h3>
+<ul>
+<li>总线型结构</li>
+<li>通道型结构</li>
+</ul>
+<h3 id="io控制方式">I/O控制方式</h3>
+<ul>
+<li>程序直接控制方式
+<ul>
+<li>CPU轮询I/O设备</li>
+<li>程序直接控制I/O方式中CPU直接控制I/O操作的过程</li>
+<li>CPU的绝大部分时间都处于等待I/O设备完成数据I/O的循环测试中</li>
+</ul>
+</li>
+<li>中断驱动I/O控制方式
+<ul>
+<li>I/O控制器：一旦接受到CPU读命令，则开始读数据；完成读数据后发送中断信号表示已就绪，当CPU请求数据时传输数据，等待下一次I/O操作</li>
+<li>CPU：CPU发出读信号以后继续其他工作，每个指令周期末尾检测中断信号，若检测到，则转向执行中断处理程序</li>
+</ul>
+</li>
+<li>DMA控制方式
+<ul>
+<li>数据传输的基本单位是数据块</li>
+<li>所传送的数据是从设备直接送入内存的，或者相反</li>
+<li>仅在传送一个或多个数据块的开始和结束时，才需CPU干预</li>
+</ul>
+</li>
+<li>通道控制方式
+<ul>
+<li>I/O通道控制方式是一种以内存为中心，实现外设与内存直接交换数据的控制方式</li>
+<li>与DMA方式相比，通道所需要CPU干预更少， 每次可以完成多个不连续的数据块传送，而且可以做到一个通道控制多台设备，从而进一步减轻了CPU的工作</li>
+<li>I/O通道具有自己的指令系统，并能实现指令所控制的操作，由CPU发出启动指令启动</li>
+<li>通过执行通道程序并与设备控制器共同实现对I/O设备的控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="缓冲">缓冲</h3>
+<p>引入原因</p>
+<ul>
+<li>缓和CPU与I/O设备间速度不匹配的矛盾</li>
+<li>提高CPU和I/O设备之间的并行性</li>
+<li>减少CPU对I/O的干预，减少对CPU的中断频率， 放宽对CPU中断响应时间的限制</li>
+</ul>
+<p>缓冲实现机制</p>
+<ul>
+<li>单缓冲区</li>
+<li>双缓冲区</li>
+<li>环缓冲区</li>
+<li>缓冲池
+<ul>
+<li>对多个缓冲区的管理</li>
+<li>收容输入、提取输入、收容输出、提取输出</li>
+</ul>
+</li>
+</ul>
+<p>设备独立性</p>
+<ul>
+<li>逻辑设备与物理设备无关</li>
+</ul>
+<p>SPOOLING（假脱机系统）</p>
+<ul>
+<li>组成
+<ul>
+<li>输入井/输出井</li>
+<li>输入缓冲区/输出缓冲区</li>
+<li>输入进程/输出进程</li>
+</ul>
+</li>
+<li>当用户进程请求打印时， SPOOLing打印机系统为它做两件事：
+<ul>
+<li>在输出井中为之申请一个空闲磁盘分区， 并将要打印的数据送入其中</li>
+<li>再为用户进程申请一张空白的用户请求打印表，并将用户的打印要求填入其中， 再将该表挂到打印请求队列上</li>
+<li>打印机空闲时：输出进程取出一张打印请求表，再从输出井中取出打印数据到输出缓冲区，通过打印机进行打印</li>
+</ul>
+</li>
+</ul>
+<h2 id="十-文件系统">十 文件系统</h2>
+<h3 id="文件的逻辑结构">文件的逻辑结构</h3>
+<ul>
+<li>有结构文件（记录式文件）
+<ul>
+<li>顺序文件</li>
+<li>索引文件</li>
+<li>索引顺序文件</li>
+<li>直接文件/哈希文件</li>
+</ul>
+</li>
+<li>无结构文件（流式文件）</li>
+</ul>
+<h3 id="文件的目录结构">文件的目录结构</h3>
+<ul>
+<li>单级目录结构</li>
+<li>两级目录结构：系统目录+用户目录</li>
+<li>树形目录结构：在两级目录的基础上，允许用户自行添加子目录</li>
+<li>无环图目录结构：同一文件和子目录可出现在不同目录中
+<ul>
+<li>别名问题、悬挂指针问题</li>
+</ul>
+</li>
+<li>通用目录结构：允许存在环</li>
+</ul>
+<h3 id="文件共享">文件共享</h3>
+<ul>
+<li>基于索引节点的共享方式
+<ul>
+<li>设置索引节点，存储文件的物理地址、链接计数（共享计数）及其它文件属性</li>
+<li>文件目录只包括文件名和该文件对应索引节点的指针</li>
+</ul>
+</li>
+<li>利用符号链实现文件共享
+<ul>
+<li>假设B为了共享C的文件F，在B中创建一个Link类型的新文件，新文件目录中只包含被链接文件F的路径名，称这种链接方法为符号链接（symbolic Linking）</li>
+<li>说明：只有文件主人的目录中有文件索引节点的指针，其它用户目录中只有路径名</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件保护措施存取控制">文件保护措施：存取控制</h3>
+<ul>
+<li>访问矩阵</li>
+</ul>
+<h3 id="文件的物理结构">文件的物理结构</h3>
+<ul>
+<li>连续文件</li>
+<li>链接文件</li>
+<li>索引文件</li>
+</ul>
+<h3 id="空闲空间管理">空闲空间管理</h3>
+<ul>
+<li>空闲表法</li>
+<li>位向量</li>
+<li>空闲块链</li>
+</ul>
+<h2 id="十一-磁盘管理">十一 磁盘管理</h2>
+<h3 id="磁盘的访问时间">磁盘的访问时间</h3>
+<ul>
+<li>数据传输时间、平均旋转延迟时间、寻道时间</li>
+</ul>
+<h3 id="磁盘调度算法">磁盘调度算法</h3>
+<ul>
+<li>先来先服务（FCFS）</li>
+<li>最短寻道优先（SSTF）</li>
+<li>扫描算法（SCAN、电梯算法）</li>
+<li>循环扫描（C-SCAN）</li>
+<li>LOOK/C-LOOK（不扫描到终点，到最远的进程就马上掉头）</li>
+<li>FSCAN：在扫描的过程中所有新产生的序列放在另外的一个队列中，当访问完当前队列之后，再访问新产生的一个队列；队列按SCAN算法处理</li>
+</ul>
+<h3 id="廉价磁盘冗余阵列raid">廉价磁盘冗余阵列RAID</h3>
+<p>并行交叉存取：</p>
+<ul>
+<li>有多台磁盘驱动器，系统将每一盘块中的数据分为若干个子盘块数据，再把每一个子盘块的数据分别存储到各个不同磁盘
+中的相同位置上</li>
+<li>当要将一个盘块的数据传送到内存时，采取并行传输方式，从而减少传输时间</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-06-28</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/osnote/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Catigeart.github.io/osnote/" data-title="操作系统复习笔记" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Catigeart.github.io/osnote/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Catigeart.github.io/osnote/" data-title="操作系统复习笔记"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Catigeart.github.io/osnote/" data-title="操作系统复习笔记"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Catigeart.github.io/osnote/" data-title="操作系统复习笔记"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://catigeart.github.io/" target="_blank">Catigeart</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
