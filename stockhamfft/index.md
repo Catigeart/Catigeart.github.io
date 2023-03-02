@@ -328,12 +328,10 @@ void ifft(int n, complex_t* x) // Inverse Fourier transform
 
 $m=2^h,~t=2^{L-h},~s=2^{-1}t,~x_h(q,p)=x_h[q+tp]$，上述过程的的数学形式化推导式如下：
 $$
-\begin{eqnarray*}
-    x_{h+1}(q,p)     & = & x_h(q,p) + x_h(q + s,p)W_N^{sp} \\\\
-    x_{h+1}(q,p + m) & = & x_h(q,p) - x_h(q + s,p)W_N^{sp} \\\\
-    q                & = & 0,1,\ldots,s-1 \\\\
-    p                & = & 0,1,\ldots,m-1 \\\\
-\end{eqnarray*}
+x_{h+1}(q,p)      =  x_h(q,p) + x_h(q + s,p)W_N^{sp} \\\\
+x_{h+1}(q,p + m)  =  x_h(q,p) - x_h(q + s,p)W_N^{sp} \\\\
+q                 =  0,1,\ldots,s-1 \\\\
+p                 =  0,1,\ldots,m-1 \\\\
 $$
 
 ## 3 Stockham FFT的迭代优化

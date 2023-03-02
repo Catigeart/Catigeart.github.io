@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/stockhamfft\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  4584 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  4574 ,
         "url": "http:\/\/catigeart.github.io\/stockhamfft\/","datePublished": "2023-03-02T16:38:00+08:00","dateModified": "2023-03-02T16:38:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,7 +103,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">从Cooley-Tukey FFT到Stockham FFT</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-02">2023-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4584 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-02">2023-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4574 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -714,12 +714,10 @@ $x_h[]$是第h步计算。当从$x_0[]$开始，得到$x_L[]$，FFT计算就完�
 </div>
 </div><p>$m=2^h,~t=2^{L-h},~s=2^{-1}t,~x_h(q,p)=x_h[q+tp]$，上述过程的的数学形式化推导式如下：
 $$
-\begin{eqnarray*}
-x_{h+1}(q,p)     &amp; = &amp; x_h(q,p) + x_h(q + s,p)W_N^{sp} \\
-x_{h+1}(q,p + m) &amp; = &amp; x_h(q,p) - x_h(q + s,p)W_N^{sp} \\
-q                &amp; = &amp; 0,1,\ldots,s-1 \\
-p                &amp; = &amp; 0,1,\ldots,m-1 \\
-\end{eqnarray*}
+x_{h+1}(q,p)      =  x_h(q,p) + x_h(q + s,p)W_N^{sp} \\
+x_{h+1}(q,p + m)  =  x_h(q,p) - x_h(q + s,p)W_N^{sp} \\
+q                 =  0,1,\ldots,s-1 \\
+p                 =  0,1,\ldots,m-1 \\
 $$</p>
 <h2 id="3-stockham-fft的迭代优化">3 Stockham FFT的迭代优化</h2>
 <p>观察上个Stockham FFT的版本，变量q可改写为循环迭代的形式：</p>
