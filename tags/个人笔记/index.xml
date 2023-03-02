@@ -4,7 +4,15 @@
         <link>http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/</link>
         <description>个人笔记 - Tag - Catigeart&#39;s Software Development Note</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>从Cooley-Tukey FFT到Stockham FFT</title>
+    <link>http://catigeart.github.io/stockhamfft/</link>
+    <pubDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>http://catigeart.github.io/stockhamfft/</guid>
+    <description><![CDATA[从Cooley-Tukey FFT到Stockham FFT 在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法： 关于FFT运算的理解与]]></description>
+</item>
+<item>
     <title>算法问题的线性规划建模</title>
     <link>http://catigeart.github.io/cs-lp/</link>
     <pubDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</pubDate>

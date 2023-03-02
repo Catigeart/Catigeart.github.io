@@ -4,9 +4,17 @@
         <link>http://catigeart.github.io/</link>
         <description>Catigeart&#39;s Software Development Blog.</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</lastBuildDate>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</lastBuildDate>
             <atom:link href="http://catigeart.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>从Cooley-Tukey FFT到Stockham FFT</title>
+    <link>http://catigeart.github.io/stockhamfft/</link>
+    <pubDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>http://catigeart.github.io/stockhamfft/</guid>
+    <description><![CDATA[从Cooley-Tukey FFT到Stockham FFT 在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法： 关于FFT运算的理解与]]></description>
+</item>
+<item>
     <title>算法问题的线性规划建模</title>
     <link>http://catigeart.github.io/cs-lp/</link>
     <pubDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</pubDate>
@@ -45,14 +53,6 @@
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/compilerll/</guid>
     <description><![CDATA[语法分析概念 从编译器前端的流程上说，语法分析对词法分析得到的记号流进行分析，识别其中的语法错误，并将正确的记号流转化为语法树，交给编译器的后]]></description>
-</item>
-<item>
-    <title></title>
-    <link>http://catigeart.github.io/stockhamfft/</link>
-    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-    <author>Catigeart</author>
-    <guid>http://catigeart.github.io/stockhamfft/</guid>
-    <description><![CDATA[从Cooley-Tukey FFT到Stockham FFT 在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法： 关于FFT运算的理解与]]></description>
 </item>
 </channel>
 </rss>
