@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>个人笔记 - Category - Catigeart&#39;s Tech Blog</title>
+        <title>个人笔记 - Category - Catigeart&#39;s Software Development Note</title>
         <link>http://catigeart.github.io/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/</link>
-        <description>个人笔记 - Category - Catigeart&#39;s Tech Blog</description>
+        <description>个人笔记 - Category - Catigeart&#39;s Software Development Note</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
             <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
     <title>算法问题的线性规划建模</title>
