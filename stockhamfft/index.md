@@ -1,8 +1,6 @@
 # 从Cooley-Tukey FFT到Stockham FFT
 
 
-# 从Cooley-Tukey FFT到Stockham FFT
-
 在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法：
 - 关于FFT运算的理解与入门，推荐观看该视频：[快速傅里叶变换(FFT)——有史以来最巧妙的算法？](https://www.bilibili.com/video/BV1za411F76U/)；
 - 关于FFT的进一步理解以及蝶形运算的理解，推荐阅读《算法导论》第20章；

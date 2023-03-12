@@ -4,13 +4,21 @@
         <link>http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/</link>
         <description>个人笔记 - Tag - Catigeart&#39;s Software Development Note</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Sun, 12 Mar 2023 14:17:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>计算机体系结构复习笔记</title>
+    <link>http://catigeart.github.io/comarch/</link>
+    <pubDate>Sun, 12 Mar 2023 14:17:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>http://catigeart.github.io/comarch/</guid>
+    <description><![CDATA[计算机体系结构复习笔记 1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能]]></description>
+</item>
+<item>
     <title>从Cooley-Tukey FFT到Stockham FFT</title>
     <link>http://catigeart.github.io/stockhamfft/</link>
     <pubDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/stockhamfft/</guid>
-    <description><![CDATA[从Cooley-Tukey FFT到Stockham FFT 在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法： 关于FFT运算的理解与]]></description>
+    <description><![CDATA[在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法： 关于FFT运算的理解与入门，推荐观看该视频：快速傅里叶变换(FFT)——有]]></description>
 </item>
 <item>
     <title>算法问题的线性规划建模</title>
