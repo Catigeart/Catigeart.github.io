@@ -4,15 +4,23 @@
         <link>http://catigeart.github.io/</link>
         <description>Catigeart&#39;s Software Development Blog.</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Sun, 12 Mar 2023 14:17:00 &#43;0800</lastBuildDate>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Sun, 19 Mar 2023 16:13:00 &#43;0800</lastBuildDate>
             <atom:link href="http://catigeart.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>高性能并行计算笔记</title>
+    <link>http://catigeart.github.io/parallelhpc/</link>
+    <pubDate>Sun, 19 Mar 2023 16:13:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>http://catigeart.github.io/parallelhpc/</guid>
+    <description><![CDATA[并行计算基础 粒度：在并行执行过程中，二次通讯之间每个处理机计算工作量大小的一个粗略描述。分为粗粒度、细粒度。 复杂性：在不考虑通讯开销的前提下]]></description>
+</item>
+<item>
     <title>计算机体系结构复习笔记</title>
     <link>http://catigeart.github.io/comarch/</link>
     <pubDate>Sun, 12 Mar 2023 14:17:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/comarch/</guid>
-    <description><![CDATA[计算机体系结构复习笔记 1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能]]></description>
+    <description><![CDATA[1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能： $$ MIPS=\frac{Instructions}{Seconds}\times10^{-6} $$ $$ CPUTime=\frac{Seconds}{Program}=\frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{Seconds}{Cycle} $$ $$ ExTime_{new}=Extime_{old}\times(1-Fraction_{enhanced}+\frac{Fraction_{enhanced}}{Speedup_{enhanced}}) $$ $$]]></description>
 </item>
 <item>
     <title>从Cooley-Tukey FFT到Stockham FFT</title>

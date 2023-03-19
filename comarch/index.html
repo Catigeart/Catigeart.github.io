@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>计算机体系结构复习笔记 - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="计算机体系结构复习笔记" />
-<meta property="og:description" content="计算机体系结构复习笔记 1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能" />
+<meta property="og:description" content="1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能： $$ MIPS=\frac{Instructions}{Seconds}\times10^{-6} $$ $$ CPUTime=\frac{Seconds}{Program}=\frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{Seconds}{Cycle} $$ $$ ExTime_{new}=Extime_{old}\times(1-Fraction_{enhanced}&#43;\frac{Fraction_{enhanced}}{Speedup_{enhanced}}) $$ $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://catigeart.github.io/comarch/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-03-12T14:17:00+08:00" />
@@ -14,11 +14,11 @@
 <meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
 
 <meta name="twitter:title" content="计算机体系结构复习笔记"/>
-<meta name="twitter:description" content="计算机体系结构复习笔记 1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能"/>
+<meta name="twitter:description" content="1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能： $$ MIPS=\frac{Instructions}{Seconds}\times10^{-6} $$ $$ CPUTime=\frac{Seconds}{Program}=\frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{Seconds}{Cycle} $$ $$ ExTime_{new}=Extime_{old}\times(1-Fraction_{enhanced}&#43;\frac{Fraction_{enhanced}}{Speedup_{enhanced}}) $$ $$"/>
 <meta name="application-name" content="Catigeart&#39;s Tech Blog">
 <meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/comarch/" /><link rel="prev" href="http://catigeart.github.io/stockhamfft/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/comarch/" /><link rel="prev" href="http://catigeart.github.io/stockhamfft/" /><link rel="next" href="http://catigeart.github.io/parallelhpc/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/comarch\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  7088 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  7083 ,
         "url": "http:\/\/catigeart.github.io\/comarch\/","datePublished": "2023-03-12T14:17:00+08:00","dateModified": "2023-03-12T14:17:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -44,7 +44,7 @@
             <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -103,7 +103,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">计算机体系结构复习笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-12">2023-03-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7088 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-12">2023-03-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7083 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -175,8 +175,7 @@
     <li><a href="#11-多处理器系统">11 多处理器系统</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="计算机体系结构复习笔记">计算机体系结构复习笔记</h1>
-<h2 id="1-计算机系统结构基础">1 计算机系统结构基础</h2>
+            </div><div class="content" id="content"><h2 id="1-计算机系统结构基础">1 计算机系统结构基础</h2>
 <p>冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序</p>
 <h3 id="性能成本功耗">性能、成本、功耗</h3>
 <ul>
@@ -326,12 +325,14 @@ $$</p>
 <p>ADD, ADDI, SUB, SUBI, MUL, DIV, LW, SW, BEQ（3操作数）, BNE（3操作数）, BLEZ（2操作数）, BGTZ（2操作数）</p>
 </li>
 <li>
-<p>SLT	R1, R2, R3	;R1=bool(R2&gt;=R3)</p>
+<p>SLT	R1, R2, R3	;R1=bool(R2&lt;R3)</p>
 </li>
 <li>
 <p>R0永远为0</p>
 </li>
 </ul>
+<p><a href="https://zhuanlan.zhihu.com/p/350466257" target="_blank" rel="noopener noreffer">MIPS汇编学习</a>
+</p>
 <h3 id="指令结构题选">指令结构题选</h3>
 <ul>
 <li>
@@ -341,7 +342,7 @@ $$</p>
 <li>CPU A：先通过一条比较指令设置条件码A，再用一条分支指令检测条件码</li>
 <li>CPU B：比较指令包含在分支指令中</li>
 </ol>
-<p>两种CPU的条件转移指令都需要2个时钟周期，其他指令需要1个时钟周期。CPU A中全部指令的25%是条件转移指令，对应地比较指令战所有指令的25%。</p>
+<p>两种CPU的条件转移指令都需要2个时钟周期，其他指令需要1个时钟周期。CPU A中全部指令的25%是条件转移指令，对应地比较指令占所有指令的25%。</p>
 <p>设CPU A共有x个指令，可求得：</p>
 <p>$$
 Cycle_A=2\times0.25x+0.25x+0.5x=1.25x\
@@ -846,7 +847,8 @@ $$</p>
 </div>
 </div><p>答：假设操作系统页大小为4KB，同时系统的物理内存足够大，即页表分配的物理内存在程序执行过程中不会被交换到swap区上。并且在后续的分析中忽略代码和局部变量i所在的页的影响。 a、b两数组大小均为65536×8=512KB。再假设a、b两数组的起始地址恰为一页的起始地址。 那么a、b两数组各自均需要512KB/4KB=128个页表项。 所以a、b的访问造成的TLB invalid 例外次数为128+128=256次； 假设TLB表项为128项，每项映射连续的偶数奇数两个页，采用LRU算法。那么第一次循环 中，a、b两数组每访问相邻偶数奇数两页的首地址时，均会触发一次TLB refill例外。后续各次循环TLB中均命中。那么共触发的TLB refill例外次数为128/2 + 128/2 = 128次。</p>
 <h3 id="tlb-verilog">TLB Verilog</h3>
-<p>已知一台计算机的虚地址为 48 位，物理地址为 40 位，页大小为 16KB，TLB 为 64 项全相 联，TLB 的每项包括一个虚页号 vpn，一个物理页号 pfn，以及一个有效位 valid，请根据如下模块接口写出一个 TLB 的地址查找部分的 Verilog 代码。 module tlb_cam(vpn_in, pfn_out, hit,…); 其中 vpn_in 为输入的虚页号，pfn_out 为输出的物理页号，hit 为表示是否找到的输出信号， “…”表示与该 TLB 输入输出有关的其他信号。重复的代码可以用“…”来简化。</p>
+<p>已知一台计算机的虚地址为 48 位，物理地址为 40 位，页大小为 16KB，TLB 为 64 项全相联，TLB 的每项包括一个虚页号 vpn，一个物理页号 pfn，以及一个有效位 valid，请根据如下模块接口写出一个 TLB 的地址查找部分的 Verilog 代码。</p>
+<p><code>module tlb_cam(vpn_in, pfn_out, hit,…);</code>其中<code>vpn_in</code>为输入的虚页号，<code>pfn_out</code>为输出的物理页号，<code>hit</code>为表示是否找到的输出信号，<code>…</code>表示与该 TLB 输入输出有关的其他信号。重复的代码可以用<code>…</code>来简化。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -918,7 +920,7 @@ $$</p>
 <li>两种可行的处理方式：
 <ol>
 <li>网络保证点到点消息的顺序性；</li>
-<li>目录发现不一致时，暂缓miss 请求的处理，等待替换消息到达后，目录状态正确后，再返回 miss 请求的响应。</li>
+<li>目录发现不一致时，暂缓 miss 请求的处理，等待替换消息到达后，目录状态正确后，再返回 miss 请求的响应。</li>
 </ol>
 </li>
 </ol>
@@ -945,7 +947,8 @@ $$</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/stockhamfft/" class="prev" rel="prev" title="从Cooley-Tukey FFT到Stockham FFT"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>从Cooley-Tukey FFT到Stockham FFT</a></div>
+    <div class="post-nav"><a href="/stockhamfft/" class="prev" rel="prev" title="从Cooley-Tukey FFT到Stockham FFT"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>从Cooley-Tukey FFT到Stockham FFT</a>
+            <a href="/parallelhpc/" class="next" rel="next" title="高性能并行计算笔记">高性能并行计算笔记<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
