@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/comarch\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  7083 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  7089 ,
         "url": "http:\/\/catigeart.github.io\/comarch\/","datePublished": "2023-03-12T14:17:00+08:00","dateModified": "2023-03-12T14:17:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,7 +103,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">计算机体系结构复习笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-12">2023-03-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7083 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-12">2023-03-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7089 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -664,11 +664,11 @@ $$</p>
 <h3 id="软件方法解决控制相关">软件方法解决控制相关</h3>
 <p>循环展开、软流水</p>
 <h3 id="硬件转移预测技术">硬件转移预测技术</h3>
-<p>转移模式历史表PHT（Pattern History Table）</p>
+<p>转移<strong>模式</strong>历史表PHT（Pattern History Table）</p>
 <ul>
 <li>每项都是两位饱和计算器，T+1，N-1，高位为1预测T，高位为0预测N</li>
 </ul>
-<p>转移历史寄存器BHR（Branch History Register）</p>
+<p>转移<strong>历史</strong>寄存器BHR（Branch History Register）</p>
 <ul>
 <li>考虑一种情况，分支TNTNTNTN，这样两位饱和计算器准确率可能为0</li>
 <li>BHR是一个记录转移历史的移位寄存器，根据BHR的值，选择不同的PHT项</li>
@@ -808,10 +808,10 @@ $$</p>
 <p><strong>虚-实与Index-Tag</strong></p>
 <p>地址分为虚地址和实地址。虚地址是逻辑地址，实地址是物理地址。页上记录的是虚地址，因此映射到Cache的时候需要转换为内存的实地址。Index是页到Cache的映射，Tag是Cache到内存的映射。</p>
 <p>考虑各种因素，采用VIPT（虚索引，实标记）的方式进行转换和映射。页映射到Cache时兵分两路，一边直接用虚索引与Cache匹配，另一边传送到TLB，由TLB转换为实标记再匹配。</p>
-<p>页和对应Cache块的低位一致，因此虚索引匹配就是低位匹配。低位不包括cache line的块内偏移位。$VI_{len}=log_2(C_{cache}\div C_{cache;line}\div n_{set})$，其中C指容量。</p>
+<p>页和对应Cache块的低位一致，因此虚索引匹配就是低位匹配。低位不包括cache line的块内偏移位。$VI_{len}=log_2(C_{cache}\div C_{cache\;line}\div n_{set})$，其中C指容量。</p>
 <p>页地址在被转换为物理Tag后，会映射到对应的Cache line上。虚实地址的低位是相同的。如果页地址低位的长度比VI长，那么尽管这些页会被映射到同一个Cache line中，但他们其实对应的是不同的物理地址。就产生了一个虚地址对应多个实地址的别名问题。为了解决别名问题，我们采用页着色的方法，强制指定这些页映射到不同的Cache line中。页着色标号从cache地址的高位开始标号。</p>
 <p><strong>页着色例子</strong></p>
-<p>例如，现有4KB页大小，L1 cache大小为32KB，四路组相联，cache line大小为32B。对于该页对应的内存，虚实地址的[11:0]12位数都是相同的；cache地址为[14:0]。cache line对应[4:0]5位。此时VI长度为$log_2(32KB\div 32B \div 4)=8$，即[12:5]8位。这时，可能有两个[11:0]相同，但第12位不同的页映射到同一个cache line中，因此需要1位页着色。页着色位为第14位。</p>
+<p>例如，现有4KB页大小，L1 cache大小为32KB，四路组相联，cache line大小为32B。对于该页对应的内存，虚实地址的[11:0]12位数都是相同的；cache地址为[14:0]。cache line对应[4:0]5位。此时VI长度为$log_2(32KB\div 32B \div 4)=8$，即[12:5]8位。这时，可能有两个[11:0]相同，但第13、14位不同的页映射到同一个cache line中，因此需要2位页着色。页着色位为第13、14位。</p>
 <h3 id="不命中的损耗">不命中的损耗</h3>
 <p>$$
 MissPenalty_{L1}=HitTime_{L2} + MissPenalty_{L2} \times MissRate_{L2}
