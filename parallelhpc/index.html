@@ -153,11 +153,11 @@ $$</p>
         data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png 2x"
         data-sizes="auto"
         alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png"
-        title="image-20230318192422680" />
-$$
-C_{i,<em>}=A_{i,</em>}B=\sum_{j=0}^{p-1}A_{i,j}B_{j,*}
-$$
-其中，C按行分块，处理机间传送B的分块：</p>
+        title="image-20230318192422680" /></p>
+<p>$$
+C_{i,*}=A_{i,*}B=\sum_{j=0}^{p-1}A_{i,j}B_{j,*}
+$$</p>
+<p>其中，C按行分块，处理机间传送B的分块：</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -176,7 +176,7 @@ $$
         alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png"
         title="image-20230318194916638" />
 $$
-C_{<em>,j}=\sum_{i=0}^{p-1}A_{</em>,i}B_{i,j}
+C_{*,j}=\sum_{i=0}^{p-1}A_{*,i}B_{i,j}
 $$
 C按列分块，处理机间通讯所传输的是计算的部分积：</p>
 <p><img
@@ -197,7 +197,7 @@ C按列分块，处理机间通讯所传输的是计算的部分积：</p>
         alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png"
         title="image-20230318195017716" />
 $$
-C_{<em>,j}=\sum_{i=0}^{p-1}A_{</em>,i}B_{i,j}
+C_{*,j}=\sum_{i=0}^{p-1}A_{*,i}B_{i,j}
 $$
 C按列分块，计算过程传送矩阵A的分块：</p>
 <p><img

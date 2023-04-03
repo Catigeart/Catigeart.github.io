@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/cs-lp\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  1532 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1533 ,
         "url": "http:\/\/catigeart.github.io\/cs-lp\/","datePublished": "2023-01-10T16:50:00+08:00","dateModified": "2023-01-10T16:50:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,7 +103,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">算法问题的线性规划建模</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-10">2023-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1532 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-10">2023-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1533 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -229,9 +229,9 @@ $$</p>
 <p>$$
 max\; z=0 \\
 \begin{align*}
-s.t.\; \sum _{u,(u,v)\in E}f_i(u,v)-\sum <em>{w,(v,w)\in E}f_i(v,w)&amp;=0,&amp;v\in V-s \\
+s.t.\; \sum _{u,(u,v)\in E}f_i(u,v)-\sum _{w,(v,w)\in E}f_i(v,w)&amp;=0,&amp;v\in V-s \\
 f_i(u,v)&amp;\geq 0,&amp;(u,v)\in E \\
-\sum ^k</em>{i=1}f_i(u,v)&amp;\leq C(u,v),&amp;(u,v)\in E \\
+\sum _{i=1}^k f_i(u,v)&amp;\leq C(u,v),&amp;(u,v)\in E \\
 \sum _{v,(s_i,v)\in E}f(s_i,v)&amp;=d_i
 \end{align*}
 $$</p>
@@ -246,7 +246,7 @@ $$</p>
 <strong>解析：</strong> 设线性规划的优化目标为最大化为真的子句数量，设指示第$j$个子句是否为真的变量为$c_j$，可得线性规划方程：
 $$
 \begin{align*}
-max\;z=;&amp; c_1    &amp;+&amp;c_2     &amp;+c_3 &amp; \\
+max\;z=\;&amp; c_1    &amp;+&amp;c_2     &amp;+c_3 &amp; \\
 s.t.\;&amp;  x_1    &amp;+&amp;(1-x_2) &amp;+x_3 &amp;\geq c_1 \\
 &amp;(1-x_1)&amp;+&amp;x_2     &amp;+(1-x_3)&amp;\geq c_2 \\
 &amp;x_1&amp;+&amp;x_2&amp;+(1-x_3)&amp;\geq c_3 \\

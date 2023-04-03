@@ -81,7 +81,7 @@ max\\; z=0 \\\\
 \begin{align*}
 s.t.\\; \sum _{u,(u,v)\in E}f_i(u,v)-\sum _{w,(v,w)\in E}f_i(v,w)&=0,&v\in V-s \\\\
 f_i(u,v)&\geq 0,&(u,v)\in E \\\\
-\sum ^k_{i=1}f_i(u,v)&\leq C(u,v),&(u,v)\in E \\\\
+\sum _{i=1}^k f_i(u,v)&\leq C(u,v),&(u,v)\in E \\\\
 \sum _{v,(s_i,v)\in E}f(s_i,v)&=d_i
 \end{align*}
 $$
@@ -100,7 +100,7 @@ SAT问题的介绍可参考此文章：[SAT问题简介](https://zhuanlan.zhihu.
 **解析：** 设线性规划的优化目标为最大化为真的子句数量，设指示第$j$个子句是否为真的变量为$c_j$，可得线性规划方程：
 $$
 \begin{align*}
-max\\;z=\;& c_1    &+&c_2     &+c_3 & \\\\
+max\\;z=\\;& c_1    &+&c_2     &+c_3 & \\\\
 s.t.\\;&  x_1    &+&(1-x_2) &+x_3 &\geq c_1 \\\\
       &(1-x_1)&+&x_2     &+(1-x_3)&\geq c_2 \\\\
       &x_1&+&x_2&+(1-x_3)&\geq c_3 \\\\
