@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【论文简记】Graph attention networks - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Graph attention networks" />
+<meta property="og:description" content="Graph attention networks Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017. 我们提出了图注意网络(GATs)，这是一种新颖的神经网络架构，可以在图结构数据上运行，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://catigeart.github.io/graph-attention-networks/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
+<meta property="article:modified_time" content="2023-05-30T00:38:00+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Software Development Note" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【论文简记】Graph attention networks"/>
+<meta name="twitter:description" content="Graph attention networks Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017. 我们提出了图注意网络(GATs)，这是一种新颖的神经网络架构，可以在图结构数据上运行，"/>
+<meta name="application-name" content="Catigeart&#39;s Tech Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/graph-attention-networks/" /><link rel="prev" href="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" /><link rel="next" href="http://catigeart.github.io/deep-residual-learning-for-image-recognition/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【论文简记】Graph attention networks",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/catigeart.github.io\/graph-attention-networks\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1030 ,
+        "url": "http:\/\/catigeart.github.io\/graph-attention-networks\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Graph attention networks</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1030 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gat结构">GAT结构</a></li>
+    <li><a href="#评估">评估</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="graph-attention-networks">Graph attention networks</h1>
+<p>Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017.</p>
+<p>我们提出了图注意网络(GATs)，这是一种新颖的神经网络架构，可以在图结构数据上运行，利用隐藏的自注意层来解决基于图卷积或其近似的先前方法的缺点。通过堆叠层，其中的节点能够参与其邻居的特征，我们可以(隐式地)为邻居中的不同节点指定不同的权重，而不需要任何昂贵的矩阵操作(例如反转)或依赖于预先知道的图结构。</p>
+<p>通过这种方式，我们同时解决了基于频谱的图神经网络的几个关键挑战，并使我们的模型很容易适用于感应和转导问题。我们的GAT模型已经在四个已建立的传导和归纳图基准中达到或匹配了最先进的结果:Cora, Citeseer和Pubmed引文网络数据集，以及蛋白质-蛋白质相互作用数据集(其中测试图在训练期间保持不可见)。</p>
+<h2 id="gat结构">GAT结构</h2>
+<p>GA层的输入是一组节点特征：
+$$
+\bold{h}={\vec{h}_1,\vec{h}_2,&hellip;,\vec{h}_N},\vec{h}_i\in \mathbb{R}^F
+$$
+其中，$N$是节点的数量，$F$是每个节点的特征数量。GA层的输出是一组新的节点特征：
+$$
+\bold{h}&rsquo;={\vec{h}_1&rsquo;,\vec{h}_2&rsquo;,&hellip;,\vec{h}_N&rsquo;},\vec{h}_i&rsquo;\in \mathbb{R}^{F&rsquo;}
+$$
+参数含义同理。</p>
+<p>为了学习到更高层的特征，引入可学习的线性变换。每个节点应用共享线性变换：
+$$
+e_{ij}=a(\bold{W}\vec{h_i},\bold{W}\vec{h_j})
+$$
+这表示出了节点j对节点i的重要性。最一般情况下，所有节点都可以注意到每一个节点，但是这种做法会丢失图的结构信息，因此选择只关注一阶邻居，称为带掩码的图注意力。</p>
+<p>为了使不同节点的系数易于比较，在本文实验中，用softmax将其归一化：
+$$
+\alpha_{ij}=softmax_j(e_{ij})=\frac{\exp(e_{ij})}{\sum_{k\in\mathcal{N}<em>i}\exp(e</em>{ik})}
+$$
+本文实验中，函数$a$实例化如下，并得到对应的$\alpha_{ij}$式子：
+$$
+{\rm LeakyReLU}(\bold{\vec{a}}^T[\bold{W}\vec{h_i}||\bold{W}\vec{h_j}])
+$$</p>
+<p>$$
+\alpha_{ij}=\frac{\exp({\rm LeakyReLU}(\bold{\vec{a}}^T[\bold{W}\vec{h_i}||\bold{W}\vec{h_j}]))}{\sum_{k\in\mathcal{N}_i}\exp({\rm LeakyReLU}(\bold{\vec{a}}^T[\bold{W}\vec{h_i}||\bold{W}\vec{h_k}]))}
+$$</p>
+<p>在得到归一化的注意力系数之后，可以通过对邻接节点特征的线性组合经过一个非线性激活函数来更新节点自身的特征作为输出：
+$$
+\vec{h_i&rsquo;}=\sigma(\sum_{j\in \mathcal{N}i}\alpha_{ij}\bold{W}\vec{h_j})
+$$
+进一步，为了稳定注意力效果，采取多头注意力，将计算后的结果Concat：
+$$
+\vec{h_i&rsquo;}\Vert_{k=1}^K\sigma(\sum_{j\in\mathcal{N}<em>i}\alpha</em>{ij}^k\bold{W}^k\vec{h_j})
+$$
+其中双竖线代表拼接。</p>
+<p>如果我们在最后一层（预测层）使用Multi-head attention mechanism，需要把输出进行平均化，再使用非线性函数（softmax或logistic sigmoid）：
+$$
+\vec{h_i&rsquo;}=\sigma(\frac{1}{K}\sum_{k=1}^K\sum_{j\in\mathcal{N}<em>i}\alpha</em>{ij}^k\bold{W}^k\vec{h_j})
+$$</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510234813246.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510234813246.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510234813246.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510234813246.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510234813246.png"
+        title="image-20230510234942987" /></p>
+<p>GA的优点：</p>
+<ul>
+<li>计算效率高，跨节点对可并行计算</li>
+<li>可以隐式地为同一邻域的节点分配不同的重要性，也有助于模型可解释性</li>
+<li>注意机制以共享的方式应用于图中的所有边，因此它不依赖于对全局图结构或所有节点(特征)的预先访问</li>
+</ul>
+<h2 id="评估">评估</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511001710817.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511001710817.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511001710817.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511001710817.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511001710817.png"
+        title="image-20230511001710817" /></p>
+<p>补充解释：</p>
+<ul>
+<li>Transductive learning：训练阶段与测试阶段都基于同样的图结构</li>
+<li>Inductive learning：训练阶段与测试阶段需要处理的图不同。通常训练阶段只是在子图（subgraph）上进行，测试阶段需要处理未知的顶点（unseen nodes）</li>
+</ul>
+<p><strong>实验结果</strong>：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002224322.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002224322.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002224322.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002224322.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002224322.png"
+        title="image-20230511002224322" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002236654.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002236654.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002236654.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002236654.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511002236654.png"
+        title="image-20230511002236654" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/graph-attention-networks/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/graph-attention-networks/" data-title="【论文简记】Graph attention networks" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/graph-attention-networks/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/graph-attention-networks/" data-title="【论文简记】Graph attention networks"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/graph-attention-networks/" data-title="【论文简记】Graph attention networks"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/graph-attention-networks/" data-title="【论文简记】Graph attention networks"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/modeling-relational-data-with-graph-convolutional-networks/" class="prev" rel="prev" title="【论文简记】Modeling Relational Data with Graph Convolutional Networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Modeling Relational Data with Graph Convolutional Networks</a>
+            <a href="/deep-residual-learning-for-image-recognition/" class="next" rel="next" title="【论文简记】Deep Residual Learning for Image Recognition">【论文简记】Deep Residual Learning for Image Recognition<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【论文简记】Relational inductive biases, deep learning, and graph networks - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Relational inductive biases, deep learning, and graph networks" />
+<meta property="og:description" content="Relational inductive biases, deep learning, and graph networks Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018. 人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
+<meta property="article:modified_time" content="2023-05-30T00:38:00+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Software Development Note" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【论文简记】Relational inductive biases, deep learning, and graph networks"/>
+<meta name="twitter:description" content="Relational inductive biases, deep learning, and graph networks Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018. 人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大"/>
+<meta name="application-name" content="Catigeart&#39;s Tech Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" /><link rel="prev" href="http://catigeart.github.io/cuda/" /><link rel="next" href="http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【论文简记】Relational inductive biases, deep learning, and graph networks",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/catigeart.github.io\/relational-inductive-biases-deep-learning-and-graph-networks\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  2502 ,
+        "url": "http:\/\/catigeart.github.io\/relational-inductive-biases-deep-learning-and-graph-networks\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Relational inductive biases, deep learning, and graph networks</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2502 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-intro">1 Intro</a></li>
+    <li><a href="#2-关系归纳偏置">2 关系归纳偏置</a>
+      <ul>
+        <li><a href="#21-标准深度学习构建块中的关系归纳偏置">2.1 标准深度学习构建块中的关系归纳偏置</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-图网络">3 图网络</a>
+      <ul>
+        <li><a href="#图网络的归纳偏置">图网络的归纳偏置</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-图网络的设计原则">4 图网络的设计原则</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="relational-inductive-biases-deep-learning-and-graph-networks">Relational inductive biases, deep learning, and graph networks</h1>
+<p>Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018.</p>
+<p>人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大进展。这在一定程度上是由于廉价的数据和廉价的计算资源，它们符合深度学习的天然优势。然而，人类智能的许多定义特征是在不同的压力下发展起来的，目前的方法仍然遥不可及。特别是，超越个人经验的概括——这是人类从婴儿期开始智能的标志——对现代人工智能来说仍然是一个巨大的挑战。</p>
+<p>以下是部分意见书，部分回顾，部分统一。我们认为，组合泛化必须是人工智能实现类人能力的首要任务，而结构化表示和计算是实现这一目标的关键。就像生物学将先天和后天合作使用一样，我们拒绝在“手工工程”和“端到端”学习之间做出错误的选择，相反，我们提倡一种受益于两者优势互补的方法。我们探讨了如何在深度学习架构中使用关系归纳偏差来促进对实体、关系和构成它们的规则的学习。我们提出了一个具有强关系归纳偏差的AI工具包的新构建块-图网络-它概括和扩展了在图上操作的神经网络的各种方法，并为操作结构化知识和产生结构化行为提供了一个直接的接口。我们讨论了图网络如何支持关系推理和组合泛化，为更复杂、可解释和灵活的推理模式奠定基础。作为本文的补充，我们还发布了一个用于构建图网络的开源软件库，并演示了如何在实践中使用它们。</p>
+<h2 id="1-intro">1 Intro</h2>
+<p>人类的智慧在于能够“无限地利用有限的手段”，从已知的构建块构建新的推断、预测和行为=&gt;组合泛化能力</p>
+<p>人类组合泛化的能力主要取决于我们表示结构和推理关系的认知机制。我们将复杂系统表示为实体及其相互作用的组合；我们使用层次结构来抽象出细粒度的差异，并捕获表征和行为之间更普遍的共性；我们通过组合熟悉的技能和惯例来解决新问题；我们通过对齐两个领域之间的关系结构，并根据对另一个领域的相应知识对其中一个领域进行推断，从而得出类比。</p>
+<p>世界是组成的，或者至少，我们用组成的术语来理解它。在学习时，我们要么将新知识融入现有的结构化表征中，要么调整结构本身以更好地适应(并利用)新知识和旧知识。</p>
+<p>人工智能如何获得组合泛化的能力？</p>
+<ul>
+<li>结构化方法</li>
+<li>端到端</li>
+</ul>
+<p>近年来，深度学习和结构化方法的交叉领域出现了一类模型，他们关注于对显示的结构化数据进行推理的方法。这些方法的共同之处在于能够在离散的实体和他们之间的关系上进行计算，它们与经典方法的不同之处在于如何学习实体和关系的表示和结构以及相应的计算。值得注意的是，这些方法都带有强烈的关系归纳偏置，以特定的架构假设的形式来引导这些方法去学习实体和关系，这被认为是类人智能的一个重要组成部分。</p>
+<h2 id="2-关系归纳偏置">2 关系归纳偏置</h2>
+<p><strong>关系推理</strong></p>
+<p>我们将结构定义为组合一组已知构建块的产物。“结构化表示”捕获这种组合(即元素的排列)，“结构化计算”将元素及其组合作为一个整体进行操作。因此，关系推理涉及操纵实体和关系的结构化表示，并使用规则来组合它们。我们使用这些术语来捕捉认知科学、理论计算机科学和人工智能的概念，如下所示:</p>
+<ul>
+<li>
+<p>实体是具有属性的元素，例如具有大小和质量的物理对象。</p>
+</li>
+<li>
+<p>关系是实体之间的属性。两个对象之间的关系可能包括SAME SIZE AS, HEAVIER THAN, AND DISTANCE FROM。关系也可以有属性。大于X倍的关系接受一个属性X，该属性决定了关系的相对权重阈值是真还是假。两国关系也可能对全局上下文很敏感。对于一块石头和一根羽毛来说，下降速度的关系取决于是在空气中还是在真空中。这里我们关注实体之间的成对关系。</p>
+</li>
+<li>
+<p>规则是一个函数(像一个非二进制逻辑谓词)，映射实体和关系到其他实体和关系，如规模比较，如是实体X大吗?实体X是否比实体Y重?这里我们考虑接受一个或两个参数(一元和二元)并返回一元属性值的规则。</p>
+</li>
+</ul>
+<p>比较经典的例子是图模型，可以通过随机变量明确随机条件独立性来表示复杂的联合分布，如隐马尔可夫模型等；或者明确表示变量之间的稀疏依赖关系，从而提供各种有效的推理和推理算法，如消息传递等。</p>
+<p><strong>归纳偏置</strong></p>
+<p>归纳偏置允许学习算法优先考虑一种解决方案(或解释)而不是另一种解决方案，独立于观察到的数据。在贝叶斯模型中，归纳偏置通常通过先验分布的选择和参数化来表示。在其他情况下，归纳偏置可能是为了避免过拟合而添加的正则化项，或者它可能被编码在算法本身的架构中。归纳偏置通常以灵活性换取改进的样本复杂性，并且可以从偏置-方差权衡的角度来理解。理想情况下，归纳偏置既可以在不显著降低性能的情况下改善对解决方案的搜索，也可以帮助找到以理想方式推广的解决方案;然而，不匹配的归纳偏置也可能通过引入太强的约束而导致次优性能。</p>
+<p>归纳偏置可以表达关于数据生成过程或解空间的假设。例如，在对数据拟合一维函数时，线性最小二乘法遵循近似函数为线性模型的约束，并且在二次惩罚下近似误差应最小。这反映了一种假设，即数据生成过程可以简单地解释为被加性高斯噪声破坏的直线过程。类似地，L2正则化优先考虑参数值较小的解，并且可以为病态问题导出唯一解和全局结构。这可以解释为一个关于学习过程的假设:当解决方案之间的模糊性较少时，寻找好的解决方案更容易。注意，这些假设不必是明确的——它们反映了对模型或算法如何与世界交互的解释。</p>
+<p>通俗地说，归纳偏置让算法优先某种解决方案，这种偏好是独立于观测的数据的。它一般是对样本的产生过程，或者最终解的空间的一些假设。</p>
+<h3 id="21-标准深度学习构建块中的关系归纳偏置">2.1 标准深度学习构建块中的关系归纳偏置</h3>
+<p><strong>全连接层</strong>：隐式关系归纳偏置非常弱：所有输入单元可以相互作用以确定任何输出单元的值</p>
+<p><strong>卷积层</strong>：局部性和平移不变性</p>
+<p><strong>循环层</strong>：时间不变性</p>
+<p><strong>集合和图</strong>：集合具有排序不变性，图是一种支持任意关系结构的表示形式</p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511231546255.png"/>
+<h2 id="3-图网络">3 图网络</h2>
+<p>总结大量前人的图神经网络工作，提出 GN 框架，用于图结构表示的关系推理。GN模块包括三个更新函数和三个聚合函数：
+$$
+\bold{e}<em>k&rsquo;=\phi^e(\bold{e}<em>k,\bold{v}</em>{rk},\bold{v}</em>{sk},\bold{u}) \quad \bold{\overline{e}}_i&rsquo;=\rho^{e\rightarrow v}(E_i&rsquo;)\
+\bold{v}_i&rsquo;=\phi^v(\bold{\overline{e}}_i&rsquo;,\bold{v}_i,\bold{u}) \quad \bold{\overline{e}}&rsquo;=\rho^{e\rightarrow u}(E&rsquo;) \
+\bold{u}_i&rsquo;=\phi^v(\bold{\overline{e}}&rsquo;,\bold{\overline{v}},\bold{u}) \quad \bold{\overline{v}}&rsquo;=\rho^{v\rightarrow u}(V&rsquo;)
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114154452.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114154452.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114154452.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114154452.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114154452.png"
+        title="image-20230512114154452" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114224293.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114224293.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114224293.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114224293.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114224293.png"
+        title="image-20230512114224293" /></p>
+<h3 id="图网络的归纳偏置">图网络的归纳偏置</h3>
+<ul>
+<li>图可以表达实体之间的任意关系，这意味着GN的输入决定了表示如何相互作用和隔离</li>
+<li>图将实体及其关系表示为集合，这些集合对置换是不变的，这意味着gn对于这些元素的顺序是不变的</li>
+<li>GN的每边和每节点函数分别在所有边和节点上重用，这意味着GN自动支持一种形式的组合泛化</li>
+</ul>
+<h2 id="4-图网络的设计原则">4 图网络的设计原则</h2>
+<ul>
+<li>灵活性：属性值的表征灵活性与图结构本身的灵活性</li>
+<li>可配置的内部块结构</li>
+<li>可组合的多块结构</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114808958.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114808958.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114808958.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114808958.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114808958.png"
+        title="image-20230512114808958" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114859436.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114859436.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114859436.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114859436.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230512114859436.png"
+        title="image-20230512114859436" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/relational-inductive-biases-deep-learning-and-graph-networks/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" data-title="【论文简记】Relational inductive biases, deep learning, and graph networks" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" data-title="【论文简记】Relational inductive biases, deep learning, and graph networks"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" data-title="【论文简记】Relational inductive biases, deep learning, and graph networks"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/" data-title="【论文简记】Relational inductive biases, deep learning, and graph networks"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/cuda/" class="prev" rel="prev" title="CUDA学习笔记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CUDA学习笔记</a>
+            <a href="/reducing-the-dimensionality-of-data-with-neural-networks/" class="next" rel="next" title="【论文简记】Reducing the dimensionality of data with neural networks">【论文简记】Reducing the dimensionality of data with neural networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【论文简记】Modeling Relational Data with Graph Convolutional Networks - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Modeling Relational Data with Graph Convolutional Networks" />
+<meta property="og:description" content="Modeling Relational Data with Graph Convolutional Networks Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607. 知识图支持各种各样的应用，包括问题回答和信息检索" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
+<meta property="article:modified_time" content="2023-05-30T00:38:00+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Software Development Note" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【论文简记】Modeling Relational Data with Graph Convolutional Networks"/>
+<meta name="twitter:description" content="Modeling Relational Data with Graph Convolutional Networks Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607. 知识图支持各种各样的应用，包括问题回答和信息检索"/>
+<meta name="application-name" content="Catigeart&#39;s Tech Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" /><link rel="prev" href="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" /><link rel="next" href="http://catigeart.github.io/graph-attention-networks/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【论文简记】Modeling Relational Data with Graph Convolutional Networks",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/catigeart.github.io\/modeling-relational-data-with-graph-convolutional-networks\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  2606 ,
+        "url": "http:\/\/catigeart.github.io\/modeling-relational-data-with-graph-convolutional-networks\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Modeling Relational Data with Graph Convolutional Networks</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2606 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-intro">1 Intro</a></li>
+    <li><a href="#2-神经关系建模">2 神经关系建模</a>
+      <ul>
+        <li><a href="#21-关系图卷积网络">2.1 关系图卷积网络</a></li>
+        <li><a href="#22-正则化">2.2 正则化</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-实体分类">3 实体分类</a></li>
+    <li><a href="#4-链路预测">4 链路预测</a></li>
+    <li><a href="#5-实验">5 实验</a>
+      <ul>
+        <li><a href="#51-实体分类">5.1 实体分类</a></li>
+        <li><a href="#52-链路预测">5.2 链路预测</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="modeling-relational-data-with-graph-convolutional-networks">Modeling Relational Data with Graph Convolutional Networks</h1>
+<p>Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607.</p>
+<p>知识图支持各种各样的应用，包括问题回答和信息检索。尽管在它们的创建和维护上投入了巨大的努力，但即使是最大的(例如，Yago、DBPedia或Wikidata)也仍然不完整。我们引入了关系图卷积网络(R-GCNs)，并将其应用于两个标准的知识库补全任务:链接预测(缺失事实的恢复，即主-谓词-对象三元组)和实体分类(缺失实体属性的恢复)。RGCNs与最近一类在图上操作的神经网络相关，并且专门用于处理现实知识库的高度多关系数据特征。我们证明了R-GCNs作为实体分类的独立模型的有效性。我们进一步证明，用于链路预测的分解模型(如DistMult)可以通过使用编码器模型来丰富它们，从而在关系图中的多个推理步骤中积累证据，从而得到显著改进，证明在FB15k-237上比仅解码器基线提高了29.8%。</p>
+<h2 id="1-intro">1 Intro</h2>
+<p>知识库组织和存储知识，但存在知识完整性的问题，从而产生了预测知识库中的缺失信息的统计关系学习（SRL）任务。假设知识库存储三元组：主语、谓词、宾语，那么可以建立有向二元关系。考虑两个SRL任务：链路预测（恢复丢失的三元组）和实体分类（为实体分配类型或分类属性）。</p>
+<p>本文贡献：</p>
+<ul>
+<li>
+<p>第一个证明图卷积网络（GCN）框架可应用于关系数据建模，特别是链路预测和实体分类</p>
+</li>
+<li>
+<p>引入参数共享和强制稀疏约束的技术，并利用他们将R-GCNs应用于具有大量关系的多图</p>
+</li>
+<li>
+<p>展示因式分解模型的性能，以DistMult为例</p>
+</li>
+</ul>
+<h2 id="2-神经关系建模">2 神经关系建模</h2>
+<p>本文符号：$G=(\mathcal{V,E,R}), v_i\in V, (v_i, r,v_j)\in \mathcal{E},r\in\mathcal{R}$</p>
+<h3 id="21-关系图卷积网络">2.1 关系图卷积网络</h3>
+<p>我们的模型是GCNs模型的扩展，可以理解为可微消息传递框架的特例：
+$$
+h_i^{l+1}=\sigma(\sum_{m\in\mathcal{M}_i}g_m(h_i^{(l)},h_j^{(l)}))
+$$
+其中$h_i^{(l)}\in\mathbb{R}^{d^{(l)}}$是节点$v_i$在第i层隐藏层的状态，$d^{(l)}$是该层的维度。$g_m$是传递的消息，$\sigma$是激活函数，$\mathcal{M}_i$是该结点的输入消息集。</p>
+<p>受其启发，我们在带标签有向图之上的前向传播模型如下：
+$$
+h_i^{(l+1)}=\sigma(\sum_{r\in\mathcal{R}}\sum_{j\in\mathcal{N}<em>i^r}\frac{1}{c</em>{i,r}}W_r^{(l)}h_j^{(l)}+W_0^{(l)}h_i^{(l)})
+$$
+$\mathcal{N}<em>i^r$表示关系R中节点i的邻居索引集，$c</em>{i,r}$是特定问题的归一化系数，可以学习得到或提前指定。</p>
+<p>直观上，上式通过归一化和对相邻节点变换后的特征向量进行累加。与常规GCNs不同，我们引入了特定于关系的转换，即依赖于边缘的类型和方向。</p>
+<p>为了确保l + 1层节点的表示也可以被l层对应的表示所告知，我们为数据中的每个节点添加了一个特殊关系类型的单个自连接。请注意，可以选择更灵活的函数，如多层神经网络(以牺牲计算效率为代价)，而不是简单的线性消息转换。我们把这个留给以后的工作。</p>
+<p>通过堆叠上述块构建R-GCNs。</p>
+<p>上式可以用稀疏矩阵有效实现，可以通过层的堆叠学习多个关系步骤的依赖。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511144601123.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511144601123.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511144601123.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511144601123.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511144601123.png"
+        title="image-20230511144601123" /></p>
+<h3 id="22-正则化">2.2 正则化</h3>
+<p>将R-GCNs应用于高度多关系数据的一个中心问题是，随着图中关系数量的增加，参数数量也会迅速增加。在实践中，这很容易导致对稀有关系的过度拟合和非常大的模型。</p>
+<p>文章引入了两种不同的正则化方法：基分解(basis-decomposition)和块对角分解(block-diagonal-decomposition)。</p>
+<p>基分解将$W_r^{(l)}$分解为B个基变换的线性组合：</p>
+<p>$$
+W_r{(l)}=\sum_{b=1}^B a_{rb}^{(l)}V_b^{(l)}
+$$
+块对角分解将$W_r^{(l)}$视为块对角矩阵：
+$$
+W_r^{(l)}=\oplus_{b=1}^B Q_{br}^{(l)}
+$$
+基函数分解可以看作是不同关系类型之间有效的权值共享形式，而块分解可以看作是对每个关系类型的权值矩阵的稀疏性约束。块分解结构编码了一种直觉，即潜在特征可以分组为变量集，这些变量集在组内比组间耦合得更紧密。这两种分解都减少了学习高度多关系数据(如现实知识库)所需的参数数量。同时，我们期望基参数化可以缓解稀有关系的过拟合，因为在稀有关系和更频繁的关系之间共享参数更新。</p>
+<h2 id="3-实体分类">3 实体分类</h2>
+<p>对于节点(实体)的(半)监督分类，我们简单地将形式为(2)的R-GCN层堆叠起来，在最后一层的输出上使用softmax(·)激活(每个节点)。我们最小化所有标记节点上的以下交叉熵损失(忽略未标记节点):
+$$
+\mathcal{L}=-\sum_{i\in\mathcal{Y}}\sum_{k=1}^K t_{ik}\ln h_{ik} ^{(L)}
+$$
+$\mathcal{Y}$是有标签的节点索引集，$h_{ik}^{(L)}$是第i个带标签节点的第k个输出，$t_{ik}$是真值标签。使用批梯度下降训练模型。</p>
+<h2 id="4-链路预测">4 链路预测</h2>
+<p>链接预测处理的是对新事实的预测，如三元组(主语，关系，宾语)。形式上，知识库由一个有向标记图G = (V, E, R)表示。我们得到的不是边的完整集合E，而是不完全子集E。任务是给可能的边(s, r, o)分配分数f(s, r, o)，以确定这些边属于E的可能性有多大。</p>
+<p>因此，本文引入图自编码器模型，由实体编码器（R-GCNs）和打分函数（解码器）组成。</p>
+<p>本文使用DistMult作为打分函数：
+$$
+f(s,r,o)=e_s^TR_re_o
+$$
+其中$e_s$和$e_o$是使用R-GCN学习到的实体嵌入，$R_r$是可学习的关系r对应的对角矩阵。</p>
+<p>使用负采样训练模型。对每个正样本采样$\omega$个负样本通过优化交叉熵损失函数使模型给正样本的打分高于负样本：
+$$
+\mathcal{L}=-\frac{1}{(1+\omega)|\hat{\mathcal{E}}|}\sum_{(s,r,o,y)\in T}y\log l(f(s,r,o))+(1-y)\log (1-l(f(s,r,o)))
+$$
+其中T是正样本和负样本集合，l是sigmoid函数，y=1表示正样本，y=0表示负样本。</p>
+<h2 id="5-实验">5 实验</h2>
+<h3 id="51-实体分类">5.1 实体分类</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202756145.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202756145.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202756145.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202756145.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202756145.png"
+        title="image-20230511202756145" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202826316.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202826316.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202826316.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202826316.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202826316.png"
+        title="image-20230511202826316" /></p>
+<h3 id="52-链路预测">5.2 链路预测</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202936469.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202936469.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202936469.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202936469.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511202936469.png"
+        title="image-20230511202936469" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511203037500.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511203037500.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511203037500.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511203037500.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230511203037500.png"
+        title="image-20230511203037500" /></p>
+<h2 id="结论">结论</h2>
+<p>我们介绍了关系图卷积网络(R-GCNs)，并在两个标准统计关系建模问题的背景下证明了它们的有效性：链路预测和实体分类。对于实体分类问题，我们已经证明了R-GCN模型可以作为一个竞争性的，端到端可训练的基于图的编码器。对于链路预测，以DistMult分解为解码组件的R-GCN模型优于直接优化的分解模型，在标准链路预测基准上取得了具有竞争力的结果。使用RGCN编码器丰富因子分解模型对于具有挑战性的FB15k-237数据集特别有价值，比仅解码器基线提高29.8%。</p>
+<p>我们的工作可以通过几种方式得到扩展。例如，图自编码器模型可以与其他分解模型结合使用，例如ComplEx (Trouillon et al . 2016)，它可以更适合于非对称关系的建模。在R-GCNs中集成实体特征也很简单，这将有利于链路预测和实体分类问题。为了解决我们方法的可扩展性，探索子采样技术是值得的，例如Hamilton, Ying和Leskovec(2017)。最后，它有望用数据依赖的注意机制取代当前对相邻节点和关系类型的求和形式。除了建模知识库之外，R-GCNs还可以推广到关系分解模型已经被证明有效的其他应用中。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/modeling-relational-data-with-graph-convolutional-networks/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" data-title="【论文简记】Modeling Relational Data with Graph Convolutional Networks" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" data-title="【论文简记】Modeling Relational Data with Graph Convolutional Networks"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" data-title="【论文简记】Modeling Relational Data with Graph Convolutional Networks"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" data-title="【论文简记】Modeling Relational Data with Graph Convolutional Networks"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/neural-message-passing-for-quantum-chemistry/" class="prev" rel="prev" title="【论文简记】Neural Message Passing for Quantum Chemistry"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Neural Message Passing for Quantum Chemistry</a>
+            <a href="/graph-attention-networks/" class="next" rel="next" title="【论文简记】Graph attention networks">【论文简记】Graph attention networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

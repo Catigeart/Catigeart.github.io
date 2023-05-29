@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【论文简记】Neural Message Passing for Quantum Chemistry - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Neural Message Passing for Quantum Chemistry" />
+<meta property="og:description" content="Neural Message Passing for Quantum Chemistry Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272. 分子的监督学习在化学、药物发现和材料科学方面具有不可思议的潜力。幸运的是，文献中已" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
+<meta property="article:modified_time" content="2023-05-30T00:38:00+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Software Development Note" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【论文简记】Neural Message Passing for Quantum Chemistry"/>
+<meta name="twitter:description" content="Neural Message Passing for Quantum Chemistry Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272. 分子的监督学习在化学、药物发现和材料科学方面具有不可思议的潜力。幸运的是，文献中已"/>
+<meta name="application-name" content="Catigeart&#39;s Tech Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" /><link rel="prev" href="http://catigeart.github.io/non-local-neural-networks/" /><link rel="next" href="http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【论文简记】Neural Message Passing for Quantum Chemistry",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/catigeart.github.io\/neural-message-passing-for-quantum-chemistry\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1220 ,
+        "url": "http:\/\/catigeart.github.io\/neural-message-passing-for-quantum-chemistry\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Neural Message Passing for Quantum Chemistry</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1220 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-介绍">1 介绍</a></li>
+    <li><a href="#2-mpnn">2 MPNN</a></li>
+    <li><a href="#3-mpnn框架理解下的已有模型">3 MPNN框架理解下的已有模型</a></li>
+    <li><a href="#4-qm9数据集">4 QM9数据集</a></li>
+    <li><a href="#5-mpnn变体">5 MPNN变体</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="neural-message-passing-for-quantum-chemistry">Neural Message Passing for Quantum Chemistry</h1>
+<p>Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272.</p>
+<p>分子的监督学习在化学、药物发现和材料科学方面具有不可思议的潜力。幸运的是，文献中已经描述了几个有前途的和密切相关的神经网络模型，这些模型不受分子对称性的影响。这些模型学习消息传递算法和聚合过程来计算整个输入图的函数。在这一点上，下一步是找到这种通用方法的一个特别有效的变体，并将其应用于化学预测基准，直到我们解决它们或达到该方法的极限。在本文中，我们将现有模型重新制定为一个我们称为消息传递神经网络(MPNNs)的单一公共框架，并在该框架内探索其他新的变体。</p>
+<p>使用mpnn，我们在一个重要的分子性质预测基准上展示了最先进的结果;这些结果足够强大，我们相信未来的工作应该集中在更大分子或更准确的地面真值标签的数据集上。</p>
+<h2 id="1-介绍">1 介绍</h2>
+<p>对分子结构的图监督学习已经提出了许多图神经网络模型，本文提出了MPNN框架，将这些模型都纳入这个框架当中，并探索新的变体。</p>
+<ul>
+<li>提出了一种MPNN，在分子预测的13个目标上实现了最先进的结果，并在其中的11个目标上达到了化学精度</li>
+<li>提出了几种不同的MPNN，在单独操作分子拓扑（没有空间信息作为输入）的情况下，在13个目标中的5个目标上达到了化学精度</li>
+<li>提出了一种通用方法来训练具有更大节点表示的MPNN，而不会相应增加计算时间和内存，与以前高维节点表示的MPNN相比，节省了大量时间</li>
+</ul>
+<h2 id="2-mpnn">2 MPNN</h2>
+<p>MPNN在无向图$G$上操作，节点特征为$x_v$，边缘特征为$e_{vw}$，可以向有向图推广。前向传播分为两个阶段：消息传递阶段和读出阶段。消息传递阶段运行$T$步，由消息函数$M_t$和定点更新函数$U_t$定义。图中每个节点的隐藏状态$h_v^t$由消息$m_v^{t+1}$更新：
+$$
+\boldsymbol{m}_i^{k+1}=\sum _{v_j\in N(v_i)}M^{(k)}(\boldsymbol{h}_i^{(k)},\boldsymbol{h}<em>j^{(k)},\boldsymbol{e}</em>{ij})
+$$</p>
+<p>$$
+\boldsymbol{h}_i^{(k+1)}=U_i^{(k)}(\boldsymbol{h}_i^{(k)},\boldsymbol{m}_i^{(k+1)})
+$$</p>
+<p>读出函数读取整个图的特征，更新特征向量：
+$$
+\hat{y}=R({h_v^T|v\in G})
+$$
+其中消息函数$M_t$、定点更新函数$U_t$、读出函数$R$均为可学习的可微函数。$R$作用于节点状态集合，必须不受节点状态排列的影响。</p>
+<h2 id="3-mpnn框架理解下的已有模型">3 MPNN框架理解下的已有模型</h2>
+<p><strong>Convolutional Networks for Learning Molecular Fingerprints, Duvenaud et al. (2015)</strong>
+$$
+M(h_v,h_w,e_{vw})=Concat(h_w,e_{vw})
+$$</p>
+<p>$$
+U_t(h_v^t,m_v^{t+1})=Sigmoid(H_t^{deg(v)}m_v^{t+1})
+$$</p>
+<p>$$
+R=f(\sum_{v,t}softmax(W_th_v^t))
+$$</p>
+<p><strong>Gated Graph Neural Networks (GG-NN), Li et al. (2016)</strong></p>
+<p>$$
+M(h_v,h_w,e_{vw})=A_{e_{vw}}h_w^t
+$$</p>
+<p>$$
+U_t(h_v^t,m_v^{t+1})=GRU(h_v^t,m_v^{t+1})
+$$</p>
+<p>$$
+R=\sum_{v,t}\sigma(i(h_v^{(T)},h_v^0))\odot(j(h_v^{(T)})
+$$</p>
+<p><strong>Interaction Networks, Battaglia et al. (2016)</strong></p>
+<p>$$
+M(h_v,h_w,e_{vw})=Concat(h_v,h_w,e_{vw})
+$$</p>
+<p>$$
+U_t(h_v^t,m_v^{t+1})=Concat(h_v,x_v,m_v)
+$$</p>
+<p>$$
+R=f(\sum_{v\in G}h_v^T)
+$$</p>
+<p><strong>Molecular Graph Convolutions, Kearnes et al. (2016)</strong></p>
+<p>$$
+M(h_v,h_w,e_{vw})=e_{vw}^t
+$$</p>
+<p>$$
+U_t(h_v^t,m_v^{t+1})=\alpha(W_1(\alpha(W_0h_v^t), m_v^{t+1})
+$$</p>
+<p>$$
+e_{vw}^{t+1}=U_t&rsquo;(e_{vw}^t,h_v^t,h_w^t)=\alpha(W_4(\alpha(W_2,e_{vw}^t),\alpha(W_3(h_v^t,h_w^t))))
+$$</p>
+<p>其中$\alpha$表示ReLU函数，(&hellip;,&hellip;)表示Concat连接。</p>
+<p><strong>Deep Tensor Neural Networks, Schutt et al. (2017)</strong></p>
+<p>$$
+M_t=tanh(W^{fc}((W^{cf}h_w^t+b_1)\odot(Q^{df}e_{vw}+b_2)))
+$$</p>
+<p>$$
+U_t(h_v^t,m_v^{t+1})=h_v^t+m_v^{t+1}
+$$</p>
+<p>$$
+R=\sum_v NN(h_v^T)
+$$</p>
+<hr>
+<p>通过上述模型总结，可以寻找MPNN中的关键想法。</p>
+<h2 id="4-qm9数据集">4 QM9数据集</h2>
+<p>数据集中的分子包括氢（H）、碳（C）、氧（O）和氮（N） ，和氟（F）原子，并且含有最多9个重（非氢）原子。总的来说，这导致了大约134k个类似药物的有机分子，这些分子跨越了广泛的化学范围。</p>
+<h2 id="5-mpnn变体">5 MPNN变体</h2>
+<p>消息函数：</p>
+<ul>
+<li>
+<p>将分子图视为有向图，因此m向量容量变成双倍；</p>
+</li>
+<li>
+<p>以GG-NN为基线作变体调整；</p>
+</li>
+<li>
+<p>增加虚拟边，允许长距离传递信息</p>
+</li>
+<li>
+<p>增加虚拟主节点，保存全局信息</p>
+</li>
+</ul>
+<p>读出函数：尝试了GG-NN的读出函数和set2set</p>
+<p>输入表示：</p>
+<ul>
+<li>化学图</li>
+<li>距离箱</li>
+<li>原始距离特征</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164629952.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164629952.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164629952.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164629952.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164629952.png"
+        title="image-20230510164629952" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164655460.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164655460.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164655460.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164655460.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230510164655460.png"
+        title="image-20230510164655460" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/neural-message-passing-for-quantum-chemistry/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" data-title="【论文简记】Neural Message Passing for Quantum Chemistry" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" data-title="【论文简记】Neural Message Passing for Quantum Chemistry"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" data-title="【论文简记】Neural Message Passing for Quantum Chemistry"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/" data-title="【论文简记】Neural Message Passing for Quantum Chemistry"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/non-local-neural-networks/" class="prev" rel="prev" title="【论文简记】Non-local Neural Networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Non-local Neural Networks</a>
+            <a href="/modeling-relational-data-with-graph-convolutional-networks/" class="next" rel="next" title="【论文简记】Modeling Relational Data with Graph Convolutional Networks">【论文简记】Modeling Relational Data with Graph Convolutional Networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

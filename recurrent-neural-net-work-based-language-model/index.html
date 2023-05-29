@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【论文简记】Recurrent neural network based language model - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Recurrent neural network based language model" />
+<meta property="og:description" content="Recurrent neural network based language model 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RN" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
+<meta property="article:modified_time" content="2023-05-30T00:38:00+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Software Development Note" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【论文简记】Recurrent neural network based language model"/>
+<meta name="twitter:description" content="Recurrent neural network based language model 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RN"/>
+<meta name="application-name" content="Catigeart&#39;s Tech Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" /><link rel="prev" href="http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/" /><link rel="next" href="http://catigeart.github.io/non-local-neural-networks/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【论文简记】Recurrent neural network based language model",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/catigeart.github.io\/recurrent-neural-net-work-based-language-model\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1158 ,
+        "url": "http:\/\/catigeart.github.io\/recurrent-neural-net-work-based-language-model\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Recurrent neural network based language model</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1158 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#模型设计">模型设计</a></li>
+    <li><a href="#优化">优化</a></li>
+    <li><a href="#实验和结论">实验和结论</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="recurrent-neural-network-based-language-model">Recurrent neural network based language model</h1>
+<p>提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混合物可以减少大约50%的困惑。语音识别实验显示，在《华尔街日报》任务上，与在相同数据量上训练的模型相比，单词错误率降低了18%左右，在更难的NIST RT05任务上，错误率降低了5%左右，即使是在backoff模型比RNN LM训练的数据多得多的情况下。我们提供了充分的经验证据，表明连接主义语言模型优于标准的n-gram技术，除了它们的高计算(训练)复杂性。</p>
+<p>Mikolov T, Karafiát M, Burget L, et al. Recurrent neural network based language model[C]//Interspeech. 2010, 2(3): 1045-1048.</p>
+<h2 id="模型设计">模型设计</h2>
+<p>本文提出了简单的递归神经网络，称为Elman网络架构：
+$$
+x(t)=w(t)+s(t-1)
+$$</p>
+<p>$$
+s_j(t)=f(\sum_ix_i(t)u_{ji})
+$$</p>
+<p>$$
+y_k(t)=g(\sum_js_j(t)v_{kj})
+$$</p>
+<p>其中，
+$$
+f(z)=\frac{1}{1+e^{-z}}
+$$</p>
+<p>$$
+g(z_m)=\frac{e^{z_m}}{\sum_k e^{z_k}}
+$$</p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/2_1.png">
+<p>训练分为几个epoch进行。所有训练数据都是顺序呈现的，权重初始化为小值（随机高斯噪声，平均值为零，方差为0.1）。起始学习率为$\alpha=0.1$。每个epoch后，对网络进行验证数据测试，如果验证数据的对数似然增加，则继续进行，否则$\alpha$减半，如果仍然没有改善，训练结束。通常训练10~20epoch后收敛。</p>
+<ul>
+<li>动态训练：运行测试时仍然更新参数</li>
+</ul>
+<p>请注意，统计语言建模中的训练阶段和测试阶段通常是不同的，因为模型不会在处理测试数据时得到更新。所以，如果一个新的人名在测试集中反复出现，即使它是由已知单词组成的，它也会反复得到一个非常小的概率。</p>
+<p>可以假设，这种长期记忆不应该存在于上下文单元的激活中(因为这些单元变化非常快)，而应该存在于突触本身——即使在测试阶段，神经网络也应该继续训练。我们把这样的模型称为动态模型。对于动态模型，我们使用固定学习率α = 0.1。而在训练阶段，所有的数据都是在epoch中多次呈现给网络，而动态模型在处理测试数据时只更新一次。这当然不是最优解决方案，但正如我们将看到的，它足以获得相对于静态模型的大的困惑减少。注意，这种修改与backoff模型的缓存技术非常相似，不同之处在于神经网络是在连续空间中学习的，所以如果&rsquo; dog &lsquo;和&rsquo; cat &lsquo;是相关的，那么在测试数据中频繁出现&rsquo; dog &lsquo;也会触发&rsquo; cat &lsquo;的概率增加。</p>
+<h2 id="优化">优化</h2>
+<p>为了提高性能，我们将出现频率低于阈值(在训练文本中)的所有单词合并到一个特殊的稀有标记中。单词概率计算为：
+$$
+P(w_i(t+1)|w(t),s(t-1))=
+\begin{equation}
+\left{
+\begin{aligned}
+\frac{y_{rare}(t)}{C_{rare}},若w_i(t+1)是rare的\
+y_i(t),其他\
+\end{aligned}
+\right.
+\end{equation}
+$$</p>
+<h2 id="实验和结论">实验和结论</h2>
+<p>RNN 相比于 Bengio  中的 FNN 的主要优势在于没有指定固定的语境，而是使用隐藏层的状态概括之前所有的语境信息。优点包括需要指定的超参数数量少。实验发现，最朴素的RNN LM模型的效果远好于（各种） n-gram 。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/recurrent-neural-net-work-based-language-model/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/reducing-the-dimensionality-of-data-with-neural-networks/" class="prev" rel="prev" title="【论文简记】Reducing the dimensionality of data with neural networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Reducing the dimensionality of data with neural networks</a>
+            <a href="/non-local-neural-networks/" class="next" rel="next" title="【论文简记】Non-local Neural Networks">【论文简记】Non-local Neural Networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,77 +4,85 @@
         <link>http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/</link>
         <description>个人笔记 - Tag - Catigeart&#39;s Software Development Note</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Fri, 31 Mar 2023 10:40:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
-    <title>CUDA学习笔记</title>
-    <link>http://catigeart.github.io/cuda/</link>
-    <pubDate>Fri, 31 Mar 2023 10:40:00 &#43;0800</pubDate>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 30 May 2023 00:38:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>【论文简记】Attention Is All You Need</title>
+    <link>http://catigeart.github.io/attention-is-all-you-need/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/cuda/</guid>
-    <description><![CDATA[网课：加速计算基础 —— CUDA C/C++笔记 基础内容：线程、内存管理和异步流 1-3 01-stream-init-solution.cu 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33]]></description>
+    <guid>http://catigeart.github.io/attention-is-all-you-need/</guid>
+    <description><![CDATA[Attention Is All You Need 主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们]]></description>
 </item>
 <item>
-    <title>高性能并行计算笔记</title>
-    <link>http://catigeart.github.io/parallelhpc/</link>
-    <pubDate>Sun, 19 Mar 2023 16:13:00 &#43;0800</pubDate>
+    <title>【论文简记】Deep Forest - Towards an alternative to deep neural networks</title>
+    <link>http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/parallelhpc/</guid>
-    <description><![CDATA[并行计算基础 粒度：在并行执行过程中，二次通讯之间每个处理机计算工作量大小的一个粗略描述。分为粗粒度、细粒度。 复杂性：在不考虑通讯开销的前提下]]></description>
+    <guid>http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/</guid>
+    <description><![CDATA[Deep Forest - Towards an alternative to deep neural networks 目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于]]></description>
 </item>
 <item>
-    <title>计算机体系结构复习笔记</title>
-    <link>http://catigeart.github.io/comarch/</link>
-    <pubDate>Sun, 12 Mar 2023 14:17:00 &#43;0800</pubDate>
+    <title>【论文简记】Deep Residual Learning for Image Recognition</title>
+    <link>http://catigeart.github.io/deep-residual-learning-for-image-recognition/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/comarch/</guid>
-    <description><![CDATA[1 计算机系统结构基础 冯·诺依曼结构：运算器、控制器、存储器、输入、输出=&gt;核心思想：存储程序 性能、成本、功耗 性能： $$ MIPS=\frac{Instructions}{Seconds}\times10^{-6} $$ $$ CPUTime=\frac{Seconds}{Program}=\frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{Seconds}{Cycle} $$ $$ ExTime_{new}=Extime_{old}\times(1-Fraction_{enhanced}+\frac{Fraction_{enhanced}}{Speedup_{enhanced}}) $$ $$]]></description>
+    <guid>http://catigeart.github.io/deep-residual-learning-for-image-recognition/</guid>
+    <description><![CDATA[Deep Residual Learning for Image Recognition 深度神经网络更难训练。我们提出了一个残差学习框架，以简化比以前使用的网络深度大得多的网络的训练。我们明确地将层重新表述为参考层输]]></description>
 </item>
 <item>
-    <title>从Cooley-Tukey FFT到Stockham FFT</title>
-    <link>http://catigeart.github.io/stockhamfft/</link>
-    <pubDate>Thu, 02 Mar 2023 16:38:00 &#43;0800</pubDate>
+    <title>【论文简记】Graph attention networks</title>
+    <link>http://catigeart.github.io/graph-attention-networks/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/stockhamfft/</guid>
-    <description><![CDATA[在阅读本文之前，你应当已理解了Cooley-Tukey FFT算法： 关于FFT运算的理解与入门，推荐观看该视频：快速傅里叶变换(FFT)——有]]></description>
+    <guid>http://catigeart.github.io/graph-attention-networks/</guid>
+    <description><![CDATA[Graph attention networks Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017. 我们提出了图注意网络(GATs)，这是一种新颖的神经网络架构，可以在图结构数据上运行，]]></description>
 </item>
 <item>
-    <title>算法问题的线性规划建模</title>
-    <link>http://catigeart.github.io/cs-lp/</link>
-    <pubDate>Tue, 10 Jan 2023 16:50:00 &#43;0800</pubDate>
+    <title>【论文简记】Modeling Relational Data with Graph Convolutional Networks</title>
+    <link>http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/cs-lp/</guid>
-    <description><![CDATA[1 食谱问题（Diet Problem） 几种食物的每单位所含营养物质及其价格如下表所示，若每天需要2000千卡能量、55克蛋白质和800毫克钙，]]></description>
+    <guid>http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/</guid>
+    <description><![CDATA[Modeling Relational Data with Graph Convolutional Networks Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607. 知识图支持各种各样的应用，包括问题回答和信息检索]]></description>
 </item>
 <item>
-    <title>操作系统复习笔记</title>
-    <link>http://catigeart.github.io/osnote/</link>
-    <pubDate>Mon, 28 Jun 2021 16:36:44 &#43;0800</pubDate>
+    <title>【论文简记】Neural Message Passing for Quantum Chemistry</title>
+    <link>http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/osnote/</guid>
-    <description><![CDATA[一 绪论 OS的作用 用户与硬件之间的接口 管理计算机资源 抽象计算机资源 OS的发展 单道批处理系统 用户程序交给监控程序，由监控程序控制作业一个接一个交]]></description>
+    <guid>http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/</guid>
+    <description><![CDATA[Neural Message Passing for Quantum Chemistry Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272. 分子的监督学习在化学、药物发现和材料科学方面具有不可思议的潜力。幸运的是，文献中已]]></description>
 </item>
 <item>
-    <title>Linux系统无痛编译安装LLVM简明指南</title>
-    <link>http://catigeart.github.io/llvmsetup/</link>
-    <pubDate>Fri, 26 Feb 2021 12:05:05 &#43;0800</pubDate>
+    <title>【论文简记】Non-local Neural Networks</title>
+    <link>http://catigeart.github.io/non-local-neural-networks/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/llvmsetup/</guid>
-    <description><![CDATA[1 编译与预编译版本选择 如果对LLVM没有特别需求，只是当作一般编译器使用，安装预编译版也足以应付场面；如果需要对LLVM作个性化定制，或基于]]></description>
+    <guid>http://catigeart.github.io/non-local-neural-networks/</guid>
+    <description><![CDATA[Non-local Neural Networks Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远]]></description>
 </item>
 <item>
-    <title>【编译原理】简明自底向上分析算法总结：LR(0)，SLR，LR(1)，LALR分析算法</title>
-    <link>http://catigeart.github.io/compilerlr/</link>
-    <pubDate>Wed, 27 Jan 2021 16:14:35 &#43;0800</pubDate>
+    <title>【论文简记】Recurrent neural network based language model</title>
+    <link>http://catigeart.github.io/recurrent-neural-net-work-based-language-model/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/compilerlr/</guid>
-    <description><![CDATA[【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法 语法分析有两个总的思路，一个是自顶向下分析，一个是自底向上分析。自底向上的]]></description>
+    <guid>http://catigeart.github.io/recurrent-neural-net-work-based-language-model/</guid>
+    <description><![CDATA[Recurrent neural network based language model 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RN]]></description>
 </item>
 <item>
-    <title>【编译原理】简明自顶向下分析算法总结：递归下降，LL(1)分析算法</title>
-    <link>http://catigeart.github.io/compilerll/</link>
-    <pubDate>Wed, 27 Jan 2021 16:14:35 &#43;0800</pubDate>
+    <title>【论文简记】Reducing the dimensionality of data with neural networks</title>
+    <link>http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
-    <guid>http://catigeart.github.io/compilerll/</guid>
-    <description><![CDATA[语法分析概念 从编译器前端的流程上说，语法分析对词法分析得到的记号流进行分析，识别其中的语法错误，并将正确的记号流转化为语法树，交给编译器的后]]></description>
+    <guid>http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/</guid>
+    <description><![CDATA[Reducing the dimensionality of data with neural networks 摘要 通过训练具有小中心层的多层神经网络重构高维输入向量，可以将高维数据转换为低维代码。梯度下降可以用于微调这种“自动编码器”]]></description>
+</item>
+<item>
+    <title>【论文简记】Relational inductive biases, deep learning, and graph networks</title>
+    <link>http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/</link>
+    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/</guid>
+    <description><![CDATA[Relational inductive biases, deep learning, and graph networks Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018. 人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大]]></description>
 </item>
 </channel>
 </rss>

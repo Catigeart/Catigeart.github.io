@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【论文简记】Deep Forest - Towards an alternative to deep neural networks - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Deep Forest - Towards an alternative to deep neural networks" />
+<meta property="og:description" content="Deep Forest - Towards an alternative to deep neural networks 目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
+<meta property="article:modified_time" content="2023-05-30T00:38:00+08:00" /><meta property="og:site_name" content="Catigeart&#39;s Software Development Note" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【论文简记】Deep Forest - Towards an alternative to deep neural networks"/>
+<meta name="twitter:description" content="Deep Forest - Towards an alternative to deep neural networks 目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于"/>
+<meta name="application-name" content="Catigeart&#39;s Tech Blog">
+<meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" /><link rel="prev" href="http://catigeart.github.io/deep-residual-learning-for-image-recognition/" /><link rel="next" href="http://catigeart.github.io/attention-is-all-you-need/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【论文简记】Deep Forest - Towards an alternative to deep neural networks",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/catigeart.github.io\/deep-forest-towards-an-alternative-to-deep-neural-networks\/"
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1126 ,
+        "url": "http:\/\/catigeart.github.io\/deep-forest-towards-an-alternative-to-deep-neural-networks\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Catigeart"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Deep Forest - Towards an alternative to deep neural networks</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1126 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-介绍">1 介绍</a></li>
+    <li><a href="#2-动机">2 动机</a></li>
+    <li><a href="#集成学习的启示">集成学习的启示：</a></li>
+    <li><a href="#3-gcforest方法">3 gcForest方法</a>
+      <ul>
+        <li><a href="#31-级联森林结构">3.1 级联森林结构</a></li>
+        <li><a href="#32-多粒度扫描">3.2 多粒度扫描</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-实验">4 实验</a></li>
+    <li><a href="#5-未来的工作">5 未来的工作</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="deep-forest---towards-an-alternative-to-deep-neural-networks">Deep Forest - Towards an alternative to deep neural networks</h1>
+<p>目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于不可微模块构建深度模型的可能性。我们推测深度神经网络成功背后的奥秘在很大程度上归功于三个特征，即逐层处理、模型内特征转换和足够的模型复杂性。我们提出了gcForest方法，该方法生成了具有这些特征的深度森林。这是一种决策树集成方法，具有比深度神经网络少得多的超参数，并且其模型复杂性可以以数据依赖的方式自动确定。实验表明，该算法的性能对超参数设置具有很强的鲁棒性，因此在大多数情况下，即使跨不同领域的不同数据，使用相同的默认设置也能获得优异的性能。本研究打开了基于不可微模块的深度学习的大门，并展示了不使用反向传播构建深度模型的可能性。</p>
+<p>Zhou Z H, Feng J. Deep Forest: Towards An Alternative to Deep Neural Networks[C]//IJCAI. 2017: 3553-3559.</p>
+<h2 id="1-介绍">1 介绍</h2>
+<p>DNN的弊端：</p>
+<ul>
+<li>超参数过多，且超参数的选取也很难理论分析</li>
+<li>理论分析困难</li>
+<li>所需数据量大</li>
+<li>黑盒模型难以理解角色过程</li>
+<li>训练前必须确定神经网络的结构，不能以数据依赖的方式自动确定</li>
+<li>一些任务中DNN表现不优越：Kaggle许多竞赛任务的赢家仍然是随机森林和XGBoost</li>
+</ul>
+<p>本文致力于解决的问题：<strong>深度学习可以在不可微的模块上实现吗？</strong></p>
+<ul>
+<li>=&gt; 深度模型是否=DNN？</li>
+<li>=&gt; 有没有可能训练没有反向传播的深度模型？（反向传播需要可微性）</li>
+<li>=&gt; 是否有可能使深度模型赢得现在其他模型（如随机森林和XGBoost）更好的任务？</li>
+</ul>
+<p><strong>gcForest</strong>：非NN风格的深度模型，具有级联结构的决策树集成，以数据依赖的方式确定模型复杂性，超参数少，表现稳健</p>
+<h2 id="2-动机">2 动机</h2>
+<p>DNN的启示：</p>
+<ul>
+<li>
+<p>深层网络的表征学习能力比浅层网络强 =&gt; <strong>逐层处理</strong></p>
+</li>
+<li>
+<p>决策树和boost也执行逐层处理，但表现不佳 =&gt; 没有<strong>模型内特征转换</strong>，限制了<strong>模型复杂度</strong></p>
+</li>
+</ul>
+<h2 id="集成学习的启示">集成学习的启示：</h2>
+<ul>
+<li>
+<p>$E=\overline{E}-\overline{A}$：个体分类器越准确、越多样化，整体效果越好</p>
+</li>
+<li>
+<p>多样性增强策略：</p>
+<ol>
+<li>数据样本操作</li>
+<li>输入特征操作</li>
+<li>学习参数操作</li>
+<li>输出表示操作</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-gcforest方法">3 gcForest方法</h2>
+<h3 id="31-级联森林结构">3.1 级联森林结构</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222625870.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222625870.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222625870.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222625870.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222625870.png"
+        title="image-20230509222625870" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222655068.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222655068.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222655068.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222655068.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509222655068.png"
+        title="image-20230509222655068" /></p>
+<p>特征增强仅采用了最简单的类向量的形式，如此少量的特征增强可能非常有限，但实验证明这样简单的特征增强也是有益的。进一步的可能性留给未来探索。</p>
+<p>为了减少过拟合的风险，每个森林产生的类向量通过k折验证生成。若验证集估计增加层数后的整个级联的性能没有显著性能增益，则训练过程自动终止。</p>
+<h3 id="32-多粒度扫描">3.2 多粒度扫描</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223722265.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223722265.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223722265.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223722265.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223722265.png"
+        title="image-20230509223722265" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223823468.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223823468.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223823468.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223823468.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/dl/image-20230509223823468.png"
+        title="image-20230509223823468" /></p>
+<h2 id="4-实验">4 实验</h2>
+<ul>
+<li>4个完全随机树森林和4个随机森林，每个随机森林包含500棵树，3折验证</li>
+<li>80%的数据用于生长集，20%的数据用于估计集</li>
+<li>使用三种不同尺寸的特征窗口：$\lfloor d/16\rfloor,\lfloor d/8\rfloor,\lfloor d/4\rfloor$</li>
+</ul>
+<p>多个数据集表现出色，对级联、多粒度和模型规模对结果的影响进行了分析。</p>
+<h2 id="5-未来的工作">5 未来的工作</h2>
+<ul>
+<li>特征增强</li>
+<li>加快速度、减小内存</li>
+<li>结合主动学习和半监督学习</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/deep-forest-towards-an-alternative-to-deep-neural-networks/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" data-title="【论文简记】Deep Forest - Towards an alternative to deep neural networks" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" data-title="【论文简记】Deep Forest - Towards an alternative to deep neural networks"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" data-title="【论文简记】Deep Forest - Towards an alternative to deep neural networks"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/" data-title="【论文简记】Deep Forest - Towards an alternative to deep neural networks"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/">个人笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/deep-residual-learning-for-image-recognition/" class="prev" rel="prev" title="【论文简记】Deep Residual Learning for Image Recognition"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Deep Residual Learning for Image Recognition</a>
+            <a href="/attention-is-all-you-need/" class="next" rel="next" title="【论文简记】Attention Is All You Need">【论文简记】Attention Is All You Need<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Catigeart" target="_blank">Catigeart</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
