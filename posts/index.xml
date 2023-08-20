@@ -4,7 +4,15 @@
         <link>http://catigeart.github.io/posts/</link>
         <description>All Posts | Catigeart&#39;s Software Development Note</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>catigeart@gmail.com (Catigeart)</managingEditor>
-            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 30 May 2023 00:38:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Sun, 20 Aug 2023 15:01:00 &#43;0800</lastBuildDate><atom:link href="http://catigeart.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>生成实数随机可逆矩阵与随机正定矩阵（C&#43;&#43;）</title>
+    <link>http://catigeart.github.io/positivedefinitematrix/</link>
+    <pubDate>Sun, 20 Aug 2023 15:01:00 &#43;0800</pubDate>
+    <author>Catigeart</author>
+    <guid>http://catigeart.github.io/positivedefinitematrix/</guid>
+    <description><![CDATA[由于最近手搓库函数，需要生成正定矩阵作为输入，因此上网查了下生成的思路，发现讨论者寥寥，即使有也不是c/cpp的底层实现，因此自己搓了个生成]]></description>
+</item>
+<item>
     <title>【论文笔记】Attention Is All You Need</title>
     <link>http://catigeart.github.io/attention-is-all-you-need/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/</guid>
     <description><![CDATA[摘要 通过训练具有小中心层的多层神经网络重构高维输入向量，可以将高维数据转换为低维代码。梯度下降可以用于微调这种“自动编码器”网络中的权重，但]]></description>
-</item>
-<item>
-    <title>【论文笔记】Relational inductive biases, deep learning, and graph networks</title>
-    <link>http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/</link>
-    <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
-    <author>Catigeart</author>
-    <guid>http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/</guid>
-    <description><![CDATA[Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018. 人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大进展。这在一定程]]></description>
 </item>
 </channel>
 </rss>
