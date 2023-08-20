@@ -1,7 +1,5 @@
-# 【论文简记】Deep Forest - Towards an alternative to deep neural networks
+# 【论文笔记】Deep Forest - Towards an alternative to deep neural networks
 
-
-# Deep Forest - Towards an alternative to deep neural networks
 
 目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于不可微模块构建深度模型的可能性。我们推测深度神经网络成功背后的奥秘在很大程度上归功于三个特征，即逐层处理、模型内特征转换和足够的模型复杂性。我们提出了gcForest方法，该方法生成了具有这些特征的深度森林。这是一种决策树集成方法，具有比深度神经网络少得多的超参数，并且其模型复杂性可以以数据依赖的方式自动确定。实验表明，该算法的性能对超参数设置具有很强的鲁棒性，因此在大多数情况下，即使跨不同领域的不同数据，使用相同的默认设置也能获得优异的性能。本研究打开了基于不可微模块的深度学习的大门，并展示了不使用反向传播构建深度模型的可能性。
 

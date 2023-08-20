@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>【论文简记】Recurrent neural network based language model - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Recurrent neural network based language model" />
-<meta property="og:description" content="Recurrent neural network based language model 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RN" />
+        <title>【论文笔记】Recurrent neural network based language model - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文笔记】Recurrent neural network based language model" />
+<meta property="og:description" content="提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
@@ -13,8 +13,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
 
-<meta name="twitter:title" content="【论文简记】Recurrent neural network based language model"/>
-<meta name="twitter:description" content="Recurrent neural network based language model 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RN"/>
+<meta name="twitter:title" content="【论文笔记】Recurrent neural network based language model"/>
+<meta name="twitter:description" content="提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混"/>
 <meta name="application-name" content="Catigeart&#39;s Tech Blog">
 <meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,12 +22,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "【论文简记】Recurrent neural network based language model",
+        "headline": "【论文笔记】Recurrent neural network based language model",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/recurrent-neural-net-work-based-language-model\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  1158 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1154 ,
         "url": "http:\/\/catigeart.github.io\/recurrent-neural-net-work-based-language-model\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -44,7 +44,7 @@
             <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 链接 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">链接</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -100,10 +100,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Recurrent neural network based language model</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文笔记】Recurrent neural network based language model</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1158 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1154 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -117,8 +117,7 @@
     <li><a href="#实验和结论">实验和结论</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="recurrent-neural-network-based-language-model">Recurrent neural network based language model</h1>
-<p>提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混合物可以减少大约50%的困惑。语音识别实验显示，在《华尔街日报》任务上，与在相同数据量上训练的模型相比，单词错误率降低了18%左右，在更难的NIST RT05任务上，错误率降低了5%左右，即使是在backoff模型比RNN LM训练的数据多得多的情况下。我们提供了充分的经验证据，表明连接主义语言模型优于标准的n-gram技术，除了它们的高计算(训练)复杂性。</p>
+            </div><div class="content" id="content"><p>提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混合物可以减少大约50%的困惑。语音识别实验显示，在《华尔街日报》任务上，与在相同数据量上训练的模型相比，单词错误率降低了18%左右，在更难的NIST RT05任务上，错误率降低了5%左右，即使是在backoff模型比RNN LM训练的数据多得多的情况下。我们提供了充分的经验证据，表明连接主义语言模型优于标准的n-gram技术，除了它们的高计算(训练)复杂性。</p>
 <p>Mikolov T, Karafiát M, Burget L, et al. Recurrent neural network based language model[C]//Interspeech. 2010, 2(3): 1045-1048.</p>
 <h2 id="模型设计">模型设计</h2>
 <p>本文提出了简单的递归神经网络，称为Elman网络架构：
@@ -149,14 +148,14 @@ $$</p>
 <p>为了提高性能，我们将出现频率低于阈值(在训练文本中)的所有单词合并到一个特殊的稀有标记中。单词概率计算为：
 $$
 P(w_i(t+1)|w(t),s(t-1))=
-\begin{equation}
-\left{
 \begin{aligned}
-\frac{y_{rare}(t)}{C_{rare}},若w_i(t+1)是rare的\
-y_i(t),其他\
+\left\{
+\begin{aligned}
+\frac{y_{rare}(t)}{C_{rare}},若w_i(t+1)是rare的\\
+y_i(t),其他\\
 \end{aligned}
 \right.
-\end{equation}
+\end{aligned}
 $$</p>
 <h2 id="实验和结论">实验和结论</h2>
 <p>RNN 相比于 Bengio  中的 FNN 的主要优势在于没有指定固定的语境，而是使用隐藏层的状态概括之前所有的语境信息。优点包括需要指定的超参数数量少。实验发现，最朴素的RNN LM模型的效果远好于（各种） n-gram 。</p>
@@ -171,7 +170,7 @@ $$</p>
                             <a class="link-to-markdown" href="/recurrent-neural-net-work-based-language-model/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文简记】Recurrent neural network based language model"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文笔记】Recurrent neural network based language model" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文笔记】Recurrent neural network based language model"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文笔记】Recurrent neural network based language model"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/recurrent-neural-net-work-based-language-model/" data-title="【论文笔记】Recurrent neural network based language model"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -183,8 +182,8 @@ $$</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/reducing-the-dimensionality-of-data-with-neural-networks/" class="prev" rel="prev" title="【论文简记】Reducing the dimensionality of data with neural networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Reducing the dimensionality of data with neural networks</a>
-            <a href="/non-local-neural-networks/" class="next" rel="next" title="【论文简记】Non-local Neural Networks">【论文简记】Non-local Neural Networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/reducing-the-dimensionality-of-data-with-neural-networks/" class="prev" rel="prev" title="【论文笔记】Reducing the dimensionality of data with neural networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文笔记】Reducing the dimensionality of data with neural networks</a>
+            <a href="/non-local-neural-networks/" class="next" rel="next" title="【论文笔记】Non-local Neural Networks">【论文笔记】Non-local Neural Networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

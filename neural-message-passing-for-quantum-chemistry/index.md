@@ -1,7 +1,5 @@
-# 【论文简记】Neural Message Passing for Quantum Chemistry
+# 【论文笔记】Neural Message Passing for Quantum Chemistry
 
-
-# Neural Message Passing for Quantum Chemistry
 
 Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272.
 

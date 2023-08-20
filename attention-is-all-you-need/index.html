@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>【论文简记】Attention Is All You Need - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Attention Is All You Need" />
-<meta property="og:description" content="Attention Is All You Need 主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们" />
+        <title>【论文笔记】Attention Is All You Need - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文笔记】Attention Is All You Need" />
+<meta property="og:description" content="主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们提出了一个" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://catigeart.github.io/attention-is-all-you-need/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
@@ -13,8 +13,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
 
-<meta name="twitter:title" content="【论文简记】Attention Is All You Need"/>
-<meta name="twitter:description" content="Attention Is All You Need 主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们"/>
+<meta name="twitter:title" content="【论文笔记】Attention Is All You Need"/>
+<meta name="twitter:description" content="主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们提出了一个"/>
 <meta name="application-name" content="Catigeart&#39;s Tech Blog">
 <meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,12 +22,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "【论文简记】Attention Is All You Need",
+        "headline": "【论文笔记】Attention Is All You Need",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/attention-is-all-you-need\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  1440 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  1436 ,
         "url": "http:\/\/catigeart.github.io\/attention-is-all-you-need\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -44,7 +44,7 @@
             <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 链接 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">链接</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -100,10 +100,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Attention Is All You Need</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文笔记】Attention Is All You Need</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1440 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1436 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -126,8 +126,7 @@
     <li><a href="#7-结论">7 结论：</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="attention-is-all-you-need">Attention Is All You Need</h1>
-<p>主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们提出了一个新的简单的网络架构，变压器，完全基于注意力机制，完全摒弃递归和卷积。在两个机器翻译任务上的实验表明，这些模型在质量上更优越，同时更具并行性，并且需要更少的训练时间。我们的模型在WMT 2014英语-德语翻译任务上实现了28.4 BLEU，比现有的最佳结果(包括集合)提高了2个BLEU以上。在WMT 2014英法翻译任务中，我们的模型在8个gpu上训练3.5天后，建立了一个新的单模型最先进的BLEU分数41.8，这是文献中最佳模型训练成本的一小部分。我们通过将Transformer成功地应用于具有大量和有限训练数据的英语选区解析，证明了它可以很好地推广到其他任务。</p>
+            </div><div class="content" id="content"><p>主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们提出了一个新的简单的网络架构，变压器，完全基于注意力机制，完全摒弃递归和卷积。在两个机器翻译任务上的实验表明，这些模型在质量上更优越，同时更具并行性，并且需要更少的训练时间。我们的模型在WMT 2014英语-德语翻译任务上实现了28.4 BLEU，比现有的最佳结果(包括集合)提高了2个BLEU以上。在WMT 2014英法翻译任务中，我们的模型在8个gpu上训练3.5天后，建立了一个新的单模型最先进的BLEU分数41.8，这是文献中最佳模型训练成本的一小部分。我们通过将Transformer成功地应用于具有大量和有限训练数据的英语选区解析，证明了它可以很好地推广到其他任务。</p>
 <p>Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need[J]. Advances in neural information processing systems, 2017, 30.</p>
 <h2 id="1-intro">1 Intro</h2>
 <ul>
@@ -215,7 +214,7 @@ $$</p>
 </ul>
 <h2 id="6-结果新的-state-of-the-art">6 结果：新的 state-of-the-art</h2>
 <h2 id="7-结论">7 结论：</h2>
-<p>提出了Transformer，在翻译任务取得了state-of-the-art，下一步工作是对注意力机制进行扩展</p>
+<p>提出了Transformer，在翻译任务取得了state-of-the-art，下一步工作是对注意力机制进行扩展。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -227,7 +226,7 @@ $$</p>
                             <a class="link-to-markdown" href="/attention-is-all-you-need/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文简记】Attention Is All You Need" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文简记】Attention Is All You Need"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文简记】Attention Is All You Need"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文简记】Attention Is All You Need"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文笔记】Attention Is All You Need" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文笔记】Attention Is All You Need"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文笔记】Attention Is All You Need"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/attention-is-all-you-need/" data-title="【论文笔记】Attention Is All You Need"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -239,7 +238,7 @@ $$</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/deep-forest-towards-an-alternative-to-deep-neural-networks/" class="prev" rel="prev" title="【论文简记】Deep Forest - Towards an alternative to deep neural networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Deep Forest - Towards an alternative to deep neural networks</a></div>
+    <div class="post-nav"><a href="/deep-forest-towards-an-alternative-to-deep-neural-networks/" class="prev" rel="prev" title="【论文笔记】Deep Forest - Towards an alternative to deep neural networks"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文笔记】Deep Forest - Towards an alternative to deep neural networks</a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

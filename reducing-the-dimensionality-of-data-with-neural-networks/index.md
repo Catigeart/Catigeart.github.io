@@ -1,7 +1,5 @@
-# 【论文简记】Reducing the dimensionality of data with neural networks
+# 【论文笔记】Reducing the dimensionality of data with neural networks
 
-
-# Reducing the dimensionality of data with neural networks
 
 ## 摘要
 

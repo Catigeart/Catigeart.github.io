@@ -1,7 +1,5 @@
-# 【论文简记】Recurrent neural network based language model
+# 【论文笔记】Recurrent neural network based language model
 
-
-# Recurrent neural network based language model
 
 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混合物可以减少大约50%的困惑。语音识别实验显示，在《华尔街日报》任务上，与在相同数据量上训练的模型相比，单词错误率降低了18%左右，在更难的NIST RT05任务上，错误率降低了5%左右，即使是在backoff模型比RNN LM训练的数据多得多的情况下。我们提供了充分的经验证据，表明连接主义语言模型优于标准的n-gram技术，除了它们的高计算(训练)复杂性。
 
@@ -46,14 +44,14 @@ $$
 为了提高性能，我们将出现频率低于阈值(在训练文本中)的所有单词合并到一个特殊的稀有标记中。单词概率计算为：
 $$
 P(w_i(t+1)|w(t),s(t-1))=
-\begin{equation}
-\left\{
 \begin{aligned}
-\frac{y_{rare}(t)}{C_{rare}},若w_i(t+1)是rare的\\
-y_i(t),其他\\
+\left\\{
+\begin{aligned}
+\frac{y_{rare}(t)}{C_{rare}},若w_i(t+1)是rare的\\\\
+y_i(t),其他\\\\
 \end{aligned}
 \right.
-\end{equation}
+\end{aligned}
 $$
 
 ## 实验和结论

@@ -1,7 +1,5 @@
-# 【论文简记】Relational inductive biases, deep learning, and graph networks
+# 【论文笔记】Relational inductive biases, deep learning, and graph networks
 
-
-# Relational inductive biases, deep learning, and graph networks
 
 Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018.
 

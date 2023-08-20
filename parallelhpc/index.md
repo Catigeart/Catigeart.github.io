@@ -43,7 +43,7 @@ $A_i,B_i,C_{i,j},j=0,1,...,p-1$存放在$P_i$中，这种存放方式使数据�
 
 **行行分块算法**：
 
-![image-20230318192422680](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png"/>
 
 $$
 C_{i,\*}=A_{i,\*}B=\sum_{j=0}^{p-1}A_{i,j}B_{j,\*}
@@ -51,27 +51,29 @@ $$
 
 其中，C按行分块，处理机间传送B的分块：
 
-![image-20230318194425469](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png"/>
 
 **列行分块算法**：
 
-![image-20230318194916638](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png"/>
+
 $$
 C_{\*,j}=\sum_{i=0}^{p-1}A_{\*,i}B_{i,j}
 $$
 C按列分块，处理机间通讯所传输的是计算的部分积：
 
-![image-20230318195825319](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png"/>
 
 **列列分块算法**：
 
-![image-20230318195017716](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png"/>
+
 $$
 C_{\*,j}=\sum_{i=0}^{p-1}A_{\*,i}B_{i,j}
 $$
 C按列分块，计算过程传送矩阵A的分块：
 
-![image-20230318195934807](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png"/>
 
 **Cannon算法**：
 
@@ -79,14 +81,27 @@ C按列分块，计算过程传送矩阵A的分块：
 
 主要的思路是A子矩阵横向循环传送，B子矩阵纵向循环传送。
 
-![image-20230318213337524](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png"/>
 
 子矩阵预重排：
 
-![image-20230318213457299](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png"/>
 
 ## LU分解
 
 矩阵以一维卷帘方式存储，矩阵的第$i$列存放在$P_{i\mod p}$中。
 
-![image-20230319141840687](https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png)
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png"/>
+
+## 迭代求解
+
+**Jacobi迭代法**：每次使用上一轮的结果迭代求解直到收敛，易于并行。
+$$
+x^{(0)}=(x_1^{(0)},x_2^{(0)},...,x_n^{(0)})^T \\
+x_i^{(k+1)}=\frac{1}{a_{ii}}(b_i-\sum_{j\neq i}^na_{ij}x_j^{(k)}),k=1,2,...
+$$
+**Gauss-Seidel迭代法**：每次迭代都使用部分更新的数据，不易于并行。
+
+## FFT
+
+内容量大，此文从略。

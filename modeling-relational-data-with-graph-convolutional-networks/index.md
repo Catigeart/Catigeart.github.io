@@ -1,7 +1,5 @@
-# 【论文简记】Modeling Relational Data with Graph Convolutional Networks
+# 【论文笔记】Modeling Relational Data with Graph Convolutional Networks
 
-
-# Modeling Relational Data with Graph Convolutional Networks
 
 Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607.
 

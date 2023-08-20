@@ -1,7 +1,5 @@
-# 【论文简记】Graph attention networks
+# 【论文笔记】Graph attention networks
 
-
-# Graph attention networks
 
 Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017.
 

@@ -7,84 +7,84 @@
             <webMaster>catigeart@gmail.com (Catigeart)</webMaster><lastBuildDate>Tue, 30 May 2023 00:38:00 &#43;0800</lastBuildDate>
             <atom:link href="http://catigeart.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>【论文简记】Attention Is All You Need</title>
+    <title>【论文笔记】Attention Is All You Need</title>
     <link>http://catigeart.github.io/attention-is-all-you-need/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/attention-is-all-you-need/</guid>
-    <description><![CDATA[Attention Is All You Need 主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们]]></description>
+    <description><![CDATA[主要的序列转导模型是基于复杂的循环或卷积神经网络，包括一个编码器和一个解码器。表现最好的模型还通过注意机制连接编码器和解码器。我们提出了一个]]></description>
 </item>
 <item>
-    <title>【论文简记】Deep Forest - Towards an alternative to deep neural networks</title>
+    <title>【论文笔记】Deep Forest - Towards an alternative to deep neural networks</title>
     <link>http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/deep-forest-towards-an-alternative-to-deep-neural-networks/</guid>
-    <description><![CDATA[Deep Forest - Towards an alternative to deep neural networks 目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于]]></description>
+    <description><![CDATA[目前的深度学习模型大多建立在神经网络上，即多层参数化的可微非线性模块，可以通过反向传播进行训练。在本文中，我们探索了基于不可微模块构建深度模]]></description>
 </item>
 <item>
-    <title>【论文简记】Deep Residual Learning for Image Recognition</title>
+    <title>【论文笔记】Deep Residual Learning for Image Recognition</title>
     <link>http://catigeart.github.io/deep-residual-learning-for-image-recognition/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/deep-residual-learning-for-image-recognition/</guid>
-    <description><![CDATA[Deep Residual Learning for Image Recognition 深度神经网络更难训练。我们提出了一个残差学习框架，以简化比以前使用的网络深度大得多的网络的训练。我们明确地将层重新表述为参考层输]]></description>
+    <description><![CDATA[深度神经网络更难训练。我们提出了一个残差学习框架，以简化比以前使用的网络深度大得多的网络的训练。我们明确地将层重新表述为参考层输入的学习残差]]></description>
 </item>
 <item>
-    <title>【论文简记】Graph attention networks</title>
+    <title>【论文笔记】Graph attention networks</title>
     <link>http://catigeart.github.io/graph-attention-networks/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/graph-attention-networks/</guid>
-    <description><![CDATA[Graph attention networks Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017. 我们提出了图注意网络(GATs)，这是一种新颖的神经网络架构，可以在图结构数据上运行，]]></description>
+    <description><![CDATA[Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017. 我们提出了图注意网络(GATs)，这是一种新颖的神经网络架构，可以在图结构数据上运行，利用隐]]></description>
 </item>
 <item>
-    <title>【论文简记】Modeling Relational Data with Graph Convolutional Networks</title>
+    <title>【论文笔记】Modeling Relational Data with Graph Convolutional Networks</title>
     <link>http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/modeling-relational-data-with-graph-convolutional-networks/</guid>
-    <description><![CDATA[Modeling Relational Data with Graph Convolutional Networks Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607. 知识图支持各种各样的应用，包括问题回答和信息检索]]></description>
+    <description><![CDATA[Schlichtkrull M, Kipf T N, Bloem P, et al. Modeling relational data with graph convolutional networks[C]//The Semantic Web: 15th International Conference, ESWC 2018, Heraklion, Crete, Greece, June 3–7, 2018, Proceedings 15. Springer International Publishing, 2018: 593-607. 知识图支持各种各样的应用，包括问题回答和信息检索。尽管在它们的]]></description>
 </item>
 <item>
-    <title>【论文简记】Neural Message Passing for Quantum Chemistry</title>
+    <title>【论文笔记】Neural Message Passing for Quantum Chemistry</title>
     <link>http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/neural-message-passing-for-quantum-chemistry/</guid>
-    <description><![CDATA[Neural Message Passing for Quantum Chemistry Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272. 分子的监督学习在化学、药物发现和材料科学方面具有不可思议的潜力。幸运的是，文献中已]]></description>
+    <description><![CDATA[Gilmer J, Schoenholz S S, Riley P F, et al. Neural message passing for quantum chemistry[C]//International conference on machine learning. PMLR, 2017: 1263-1272. 分子的监督学习在化学、药物发现和材料科学方面具有不可思议的潜力。幸运的是，文献中已经描述了几个]]></description>
 </item>
 <item>
-    <title>【论文简记】Non-local Neural Networks</title>
+    <title>【论文笔记】Non-local Neural Networks</title>
     <link>http://catigeart.github.io/non-local-neural-networks/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/non-local-neural-networks/</guid>
-    <description><![CDATA[Non-local Neural Networks Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远]]></description>
+    <description><![CDATA[Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远程依赖]]></description>
 </item>
 <item>
-    <title>【论文简记】Recurrent neural network based language model</title>
+    <title>【论文笔记】Recurrent neural network based language model</title>
     <link>http://catigeart.github.io/recurrent-neural-net-work-based-language-model/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/recurrent-neural-net-work-based-language-model/</guid>
-    <description><![CDATA[Recurrent neural network based language model 提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RN]]></description>
+    <description><![CDATA[提出了一种新的基于递归神经网络的语言模型(RNN LM)，并将其应用于语音识别。结果表明，与最先进的后退语言模型相比，使用几个RNN LMs的混]]></description>
 </item>
 <item>
-    <title>【论文简记】Reducing the dimensionality of data with neural networks</title>
+    <title>【论文笔记】Reducing the dimensionality of data with neural networks</title>
     <link>http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/reducing-the-dimensionality-of-data-with-neural-networks/</guid>
-    <description><![CDATA[Reducing the dimensionality of data with neural networks 摘要 通过训练具有小中心层的多层神经网络重构高维输入向量，可以将高维数据转换为低维代码。梯度下降可以用于微调这种“自动编码器”]]></description>
+    <description><![CDATA[摘要 通过训练具有小中心层的多层神经网络重构高维输入向量，可以将高维数据转换为低维代码。梯度下降可以用于微调这种“自动编码器”网络中的权重，但]]></description>
 </item>
 <item>
-    <title>【论文简记】Relational inductive biases, deep learning, and graph networks</title>
+    <title>【论文笔记】Relational inductive biases, deep learning, and graph networks</title>
     <link>http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/</link>
     <pubDate>Tue, 30 May 2023 00:38:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/relational-inductive-biases-deep-learning-and-graph-networks/</guid>
-    <description><![CDATA[Relational inductive biases, deep learning, and graph networks Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018. 人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大]]></description>
+    <description><![CDATA[Battaglia P W, Hamrick J B, Bapst V, et al. Relational inductive biases, deep learning, and graph networks[J]. arXiv preprint arXiv:1806.01261, 2018. 人工智能(AI)最近经历了一次复兴，在视觉、语言、控制和决策等关键领域取得了重大进展。这在一定程]]></description>
 </item>
 </channel>
 </rss>

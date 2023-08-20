@@ -1,7 +1,5 @@
-# 【论文简记】Non-local Neural Networks
+# 【论文笔记】Non-local Neural Networks
 
-
-# Non-local Neural Networks
 
 Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803.
 

@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>【论文简记】Non-local Neural Networks - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文简记】Non-local Neural Networks" />
-<meta property="og:description" content="Non-local Neural Networks Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远" />
+        <title>【论文笔记】Non-local Neural Networks - Catigeart&#39;s Software Development Note</title><meta name="Description" content="Catigeart&#39;s Software Development Blog."><meta property="og:title" content="【论文笔记】Non-local Neural Networks" />
+<meta property="og:description" content="Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远程依赖" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://catigeart.github.io/non-local-neural-networks/" /><meta property="og:image" content="http://catigeart.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-30T00:38:00+08:00" />
@@ -13,8 +13,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://catigeart.github.io/logo.png"/>
 
-<meta name="twitter:title" content="【论文简记】Non-local Neural Networks"/>
-<meta name="twitter:description" content="Non-local Neural Networks Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远"/>
+<meta name="twitter:title" content="【论文笔记】Non-local Neural Networks"/>
+<meta name="twitter:description" content="Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803. 卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远程依赖"/>
 <meta name="application-name" content="Catigeart&#39;s Tech Blog">
 <meta name="apple-mobile-web-app-title" content="Catigeart&#39;s Tech Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,12 +22,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "【论文简记】Non-local Neural Networks",
+        "headline": "【论文笔记】Non-local Neural Networks",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/non-local-neural-networks\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  946 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  943 ,
         "url": "http:\/\/catigeart.github.io\/non-local-neural-networks\/","datePublished": "2023-05-30T00:38:00+08:00","dateModified": "2023-05-30T00:38:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -44,7 +44,7 @@
             <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 链接 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">链接</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -100,10 +100,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文简记】Non-local Neural Networks</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【论文笔记】Non-local Neural Networks</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;946 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-30">2023-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;943 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -121,8 +121,7 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="non-local-neural-networks">Non-local Neural Networks</h1>
-<p>Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803.</p>
+            </div><div class="content" id="content"><p>Wang X, Girshick R, Gupta A, et al. Non-local neural networks[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 7794-7803.</p>
 <p>卷积运算和循环运算都是每次处理一个局部邻域的构建块。在本文中，我们将非局部操作作为捕获远程依赖关系的通用构建块。受计算机视觉中经典的非局部均值方法[4]的启发，我们的非局部运算将一个位置的响应计算为所有位置特征的加权和。这个构建块可以插入到许多计算机视觉体系结构中。在视频分类任务上，即使没有任何花哨的东西，我们的非局部模型也可以在Kinetics和Charades数据集上竞争或优于当前的竞争获胜者。在静态图像识别中，我们的非局部模型改进了COCO任务套件上的目标检测/分割和姿态估计。代码将提供。</p>
 <p>注意力机制的一般化总结：</p>
 <ul>
@@ -198,7 +197,7 @@ $$</p>
                             <a class="link-to-markdown" href="/non-local-neural-networks/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文简记】Non-local Neural Networks" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/non-local-neural-networks/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文简记】Non-local Neural Networks"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文简记】Non-local Neural Networks"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文简记】Non-local Neural Networks"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文笔记】Non-local Neural Networks" data-hashtags="个人笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://catigeart.github.io/non-local-neural-networks/" data-hashtag="个人笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文笔记】Non-local Neural Networks"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文笔记】Non-local Neural Networks"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://catigeart.github.io/non-local-neural-networks/" data-title="【论文笔记】Non-local Neural Networks"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -210,8 +209,8 @@ $$</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/recurrent-neural-net-work-based-language-model/" class="prev" rel="prev" title="【论文简记】Recurrent neural network based language model"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文简记】Recurrent neural network based language model</a>
-            <a href="/neural-message-passing-for-quantum-chemistry/" class="next" rel="next" title="【论文简记】Neural Message Passing for Quantum Chemistry">【论文简记】Neural Message Passing for Quantum Chemistry<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/recurrent-neural-net-work-based-language-model/" class="prev" rel="prev" title="【论文笔记】Recurrent neural network based language model"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【论文笔记】Recurrent neural network based language model</a>
+            <a href="/neural-message-passing-for-quantum-chemistry/" class="next" rel="next" title="【论文笔记】Neural Message Passing for Quantum Chemistry">【论文笔记】Neural Message Passing for Quantum Chemistry<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

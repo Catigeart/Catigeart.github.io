@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/catigeart.github.io\/parallelhpc\/"
-        },"genre": "posts","keywords": "个人笔记","wordcount":  739 ,
+        },"genre": "posts","keywords": "个人笔记","wordcount":  831 ,
         "url": "http:\/\/catigeart.github.io\/parallelhpc\/","datePublished": "2023-03-19T16:13:00+08:00","dateModified": "2023-03-19T16:13:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -44,7 +44,7 @@
             <a href="/" title="Catigeart&#39;s Software Development Note">Catigeart&#39;s Software Development Note</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 链接 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">链接</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -103,7 +103,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">高性能并行计算笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/Catigeart" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Catigeart</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>个人笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-19">2023-03-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;739 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-19">2023-03-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;831 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -115,6 +115,8 @@
     <li><a href="#并行计算基础">并行计算基础</a></li>
     <li><a href="#矩阵乘并行计算">矩阵乘并行计算</a></li>
     <li><a href="#lu分解">LU分解</a></li>
+    <li><a href="#迭代求解">迭代求解</a></li>
+    <li><a href="#fft">FFT</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="并行计算基础">并行计算基础</h2>
@@ -146,99 +148,45 @@ $$</p>
 <p>其中，C按行分块，处理机间传输B的分块：</p>
 <img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318191313300.png"/>
 <p><strong>行行分块算法</strong>：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png"
-        title="image-20230318192422680" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318192422680.png"/>
 <p>$$
 C_{i,*}=A_{i,*}B=\sum_{j=0}^{p-1}A_{i,j}B_{j,*}
 $$</p>
 <p>其中，C按行分块，处理机间传送B的分块：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png"
-        title="image-20230318194425469" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194425469.png"/>
 <p><strong>列行分块算法</strong>：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png"
-        title="image-20230318194916638" />
-$$
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318194916638.png"/>
+<p>$$
 C_{*,j}=\sum_{i=0}^{p-1}A_{*,i}B_{i,j}
 $$
 C按列分块，处理机间通讯所传输的是计算的部分积：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png"
-        title="image-20230318195825319" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195825319.png"/>
 <p><strong>列列分块算法</strong>：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png"
-        title="image-20230318195017716" />
-$$
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195017716.png"/>
+<p>$$
 C_{*,j}=\sum_{i=0}^{p-1}A_{*,i}B_{i,j}
 $$
 C按列分块，计算过程传送矩阵A的分块：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png"
-        title="image-20230318195934807" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318195934807.png"/>
 <p><strong>Cannon算法</strong>：</p>
 <p><a href="https://www.cnblogs.com/babyclass/p/16633535.html" target="_blank" rel="noopener noreffer">MPI学习笔记（四）：矩阵相乘的Cannon卡农算法 - 惊小呆520 - 博客园 (cnblogs.com)</a>
 </p>
 <p>主要的思路是A子矩阵横向循环传送，B子矩阵纵向循环传送。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png"
-        title="image-20230318213337524" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213337524.png"/>
 <p>子矩阵预重排：</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png"
-        title="image-20230318213457299" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230318213457299.png"/>
 <h2 id="lu分解">LU分解</h2>
 <p>矩阵以一维卷帘方式存储，矩阵的第$i$列存放在$P_{i\mod p}$中。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png 1.5x, https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png"
-        title="image-20230319141840687" /></p>
+<img src="https://cdn.jsdelivr.net/gh/Catigeart/imgHost/img/hpc/image-20230319141840687.png"/>
+<h2 id="迭代求解">迭代求解</h2>
+<p><strong>Jacobi迭代法</strong>：每次使用上一轮的结果迭代求解直到收敛，易于并行。
+$$
+x^{(0)}=(x_1^{(0)},x_2^{(0)},&hellip;,x_n^{(0)})^T \
+x_i^{(k+1)}=\frac{1}{a_{ii}}(b_i-\sum_{j\neq i}^na_{ij}x_j^{(k)}),k=1,2,&hellip;
+$$
+<strong>Gauss-Seidel迭代法</strong>：每次迭代都使用部分更新的数据，不易于并行。</p>
+<h2 id="fft">FFT</h2>
+<p>内容量大，此文从略。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

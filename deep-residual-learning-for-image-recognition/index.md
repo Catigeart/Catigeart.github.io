@@ -1,7 +1,5 @@
-# 【论文简记】Deep Residual Learning for Image Recognition
+# 【论文笔记】Deep Residual Learning for Image Recognition
 
-
-# Deep Residual Learning for Image Recognition
 
 深度神经网络更难训练。我们提出了一个残差学习框架，以简化比以前使用的网络深度大得多的网络的训练。我们明确地将层重新表述为参考层输入的学习残差函数，而不是学习未参考的函数。我们提供了全面的经验证据，表明这些残差网络更容易优化，并且可以从相当大的深度中获得精度。在ImageNet数据集上，我们评估了深度高达152层的残差网络——比VGG网络深度8倍[40]，但仍然具有较低的复杂性。这些残差网络的集合在ImageNet测试集上的误差达到3.57%。该结果在ILSVRC 2015分类任务中获得第一名。我们还介绍了100层和1000层的CIFAR-10分析。
 
