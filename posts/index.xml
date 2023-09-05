@@ -10,7 +10,7 @@
     <pubDate>Sun, 20 Aug 2023 15:01:00 &#43;0800</pubDate>
     <author>Catigeart</author>
     <guid>http://catigeart.github.io/positivedefinitematrix/</guid>
-    <description><![CDATA[由于最近手搓库函数，需要生成正定矩阵作为输入，因此上网查了下生成的思路，发现讨论者寥寥，即使有也不是c/cpp的底层实现，因此自己搓了个生成]]></description>
+    <description><![CDATA[由于最近手搓库函数，需要生成对称正定矩阵作为输入，因此上网查了下生成的思路，发现讨论者寥寥，即使有也不是c/cpp的底层实现，因此自己搓了个]]></description>
 </item>
 <item>
     <title>【论文笔记】Attention Is All You Need</title>
